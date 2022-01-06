@@ -431,10 +431,10 @@ class FLog {
         text: text,
         logLevel: type,
         dataLogType: dataLogType,
-        exception: exception.toString(),
+        exception: exception?.toString(),
         timestamp: DateTimeUtils.getCurrentTimestamp(_config),
         timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
-        stacktrace: formattedStackTrace ?? stacktrace.toString(),
+        stacktrace: formattedStackTrace ?? stacktrace?.toString(),
       );
 
       //writing it to DB
