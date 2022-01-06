@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:meta/meta.dart';
 import 'package:pointycastle/block/aes_fast.dart';
 import 'package:pointycastle/block/modes/gcm.dart';
 import 'package:pointycastle/pointycastle.dart';
@@ -31,7 +30,7 @@ class _GCMEncoder extends Converter<Map<String, dynamic>, String> {
     );
     cipher.init(true, encryptionParameters);
 
-    final encryptedData = cipher.process(utf8.encode(jsonEncode(input)));
+    final encryptedData = cipher.process(Uint8List.fromList(utf8.encode(jsonEncode(input))));
 
     return base64Encode(iv + encryptedData);
   }
@@ -96,5 +95,5 @@ class _GCMCodec extends Codec<Map<String, dynamic>, String> {
 ///
 /// // ...your database is ready to use as encrypted
 /// ```
-SembastCodec getGCMSembastCodec({@required String password}) =>
+SembastCodec getGCMSembastCodec({required String password}) =>
     SembastCodec(signature: 'aes-gcm', codec: _GCMCodec(password));
