@@ -1,4 +1,4 @@
-enum FormatType { FORMAT_CURLY, FORMAT_SQUARE, FORMAT_CSV, FORMAT_CUSTOM }
+enum FormatType { FORMAT_SIMPLE, FORMAT_CURLY, FORMAT_SQUARE, FORMAT_CSV, FORMAT_CUSTOM }
 
 /// Simple class which provide methods to convert `FormatType` to String and back
 class FormatTypeConverter {

@@ -37,7 +37,7 @@ class Log {
       'timeInMillis': timeInMillis,
       'exception': exception,
       'dataLogType': dataLogType,
-      'logLevel': LogLevelConverter.fromEnumToString(logLevel),
+      'logLevel': logLevel.toString(),
       'stacktrace': stacktrace,
     };
   }

@@ -4,7 +4,7 @@ enum LogLevel { ALL, TRACE, DEBUG, INFO, WARNING, ERROR, SEVERE, FATAL, OFF }
 class LogLevelConverter {
   /// Converts `LogLevel` to String
   static String fromEnumToString(LogLevel? type) {
-    return type.toString();
+    return type.toString().split('.').last;
   }
 
   /// String to `LogLevel`

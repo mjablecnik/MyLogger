@@ -34,7 +34,7 @@ class LogsConfig {
   List<String> dataLogTypes = [DataLogType.DEFAULT.toString()];
 
   /// Default format of '{String}' log data
-  FormatType formatType = FormatType.FORMAT_CURLY;
+  FormatType formatType = FormatType.FORMAT_SIMPLE;
 
   /// Field order for output
   List<FieldName> fieldOrderFormatCustom = [
@@ -63,8 +63,7 @@ class LogsConfig {
   String encryptionKey = "";
 
   /// Timestamp format
-  String timestampFormat =
-      TimestampFormat.TIME_FORMAT_READABLE; //Timestamp format
+  String timestampFormat = TimestampFormat.DEFAULT;
 
   // Configure a custom formatter for the StackTrace
   StackTraceFormatter? stackTraceFormatter;

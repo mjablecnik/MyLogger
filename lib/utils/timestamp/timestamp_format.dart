@@ -1,4 +1,5 @@
 class TimestampFormat {
+  static const DEFAULT = "";
   static const DATE_FORMAT_1 = "ddMMyyyy";
   static const DATE_FORMAT_2 = "MM/dd/yyyy";
   static const TIME_FORMAT_FULL_JOINED = "ddMMyyyy_kkmmss_a";

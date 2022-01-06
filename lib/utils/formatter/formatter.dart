@@ -5,28 +5,44 @@ class Formatter {
   static String format(Log log, LogsConfig config) {
     String? output;
 
-    if (config.formatType.toString() == FormatType.FORMAT_CURLY.toString()) {
-      output = _formatCurly(log, config.isDevelopmentDebuggingEnabled);
-    } else if (config.formatType.toString() ==
-        FormatType.FORMAT_SQUARE.toString()) {
-      output = _formatSquare(log, config.isDevelopmentDebuggingEnabled);
-    } else if (config.formatType.toString() ==
-        FormatType.FORMAT_CSV.toString()) {
-      output = _formatCsv(
-          log, config.csvDelimiter, config.isDevelopmentDebuggingEnabled);
-    } else if (config.formatType.toString() ==
-        FormatType.FORMAT_CUSTOM.toString()) {
-      output = _formatCustom(
+    switch (config.formatType) {
+      case FormatType.FORMAT_SIMPLE:
+        output = _formatSimple(log, config.isDevelopmentDebuggingEnabled);
+        break;
+      case FormatType.FORMAT_CURLY:
+        output = _formatCurly(log, config.isDevelopmentDebuggingEnabled);
+        break;
+      case FormatType.FORMAT_SQUARE:
+        output = _formatSquare(log, config.isDevelopmentDebuggingEnabled);
+        break;
+      case FormatType.FORMAT_CSV:
+        output = _formatCsv(log, config.csvDelimiter, config.isDevelopmentDebuggingEnabled);
+        break;
+      case FormatType.FORMAT_CUSTOM:
+        output = _formatCustom(
           log,
           config.customOpeningDivider,
           config.customClosingDivider,
           config.isDevelopmentDebuggingEnabled,
-          config.fieldOrderFormatCustom);
-    } else {
-      output = _formatCurly(log, config.isDevelopmentDebuggingEnabled);
+          config.fieldOrderFormatCustom,
+        );
+        break;
     }
 
     return "$output\n";
+  }
+
+  static String? _formatSimple(Log log, bool isDevelopmentDebuggingEnabled) {
+    String? output;
+    output =
+        "${LogLevelConverter.fromEnumToString(log.logLevel)} ${log.timestamp} - ${log.text} ${log.exception ?? ''} ${log.stacktrace ?? ''}";
+
+    if (isDevelopmentDebuggingEnabled) {
+      output += !kReleaseMode ? " ${log.dataLogType} " : "";
+      output += !kReleaseMode ? "${log.timeInMillis}" : "";
+    }
+
+    return output;
   }
 
   static String? _formatCurly(Log log, bool isDevelopmentDebuggingEnabled) {
@@ -67,8 +83,7 @@ class Formatter {
     return output;
   }
 
-  static String? _formatCsv(
-      Log log, String deliminator, bool isDevelopmentDebuggingEnabled) {
+  static String? _formatCsv(Log log, String deliminator, bool isDevelopmentDebuggingEnabled) {
     String? output;
 
     output = "${log.className}$deliminator ";
@@ -77,8 +92,7 @@ class Formatter {
     output += log.exception != 'null' ? "${log.exception}$deliminator " : "";
     output += "${log.logLevel.toString()}$deliminator ";
     output += "${log.timestamp} ";
-    output +=
-        log.stacktrace != 'null' ? "${log.stacktrace}$deliminator " : "";
+    output += log.stacktrace != 'null' ? "${log.stacktrace}$deliminator " : "";
 
     if (isDevelopmentDebuggingEnabled) {
       output += !kReleaseMode ? "${log.dataLogType} " : "";
@@ -109,9 +123,7 @@ class Formatter {
           output += "$openingDivider${log.text}$closingDivider ";
         }
         if (fieldName == FieldName.EXCEPTION) {
-          output += log.exception != 'null'
-              ? "$openingDivider${log.exception}$closingDivider "
-              : "";
+          output += log.exception != 'null' ? "$openingDivider${log.exception}$closingDivider " : "";
         }
         if (fieldName == FieldName.LOG_LEVEL) {
           output += "$openingDivider${log.logLevel.toString()}$closingDivider ";
@@ -120,19 +132,13 @@ class Formatter {
           output += "$openingDivider${log.timestamp}$closingDivider ";
         }
         if (fieldName == FieldName.STACKTRACE) {
-          output += log.stacktrace != 'null'
-              ? "$openingDivider${log.stacktrace}$closingDivider "
-              : "";
+          output += log.stacktrace != 'null' ? "$openingDivider${log.stacktrace}$closingDivider " : "";
         }
       });
 
       if (isDevelopmentDebuggingEnabled) {
-        output += !kReleaseMode
-            ? "$openingDivider${log.dataLogType}$closingDivider "
-            : "";
-        output += !kReleaseMode
-            ? "$openingDivider${log.timeInMillis}$closingDivider"
-            : "";
+        output += !kReleaseMode ? "$openingDivider${log.dataLogType}$closingDivider " : "";
+        output += !kReleaseMode ? "$openingDivider${log.timeInMillis}$closingDivider" : "";
       }
     }
 
