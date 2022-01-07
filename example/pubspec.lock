@@ -268,6 +268,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  template_string:
+    dependency: transitive
+    description:
+      name: template_string
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0"
   term_glyph:
     dependency: transitive
     description:

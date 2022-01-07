@@ -33,28 +33,8 @@ class LogsConfig {
   /// Like Network, Database, Location etc
   List<String> dataLogTypes = [DataLogType.DEFAULT.toString()];
 
-  /// Default format of '{String}' log data
-  FormatType formatType = FormatType.FORMAT_SIMPLE;
-
-  /// Field order for output
-  List<FieldName> fieldOrderFormatCustom = [
-    FieldName.CLASSNAME,
-    FieldName.METHOD_NAME,
-    FieldName.TEXT,
-    FieldName.EXCEPTION,
-    FieldName.LOG_LEVEL,
-    FieldName.TIMESTAMP,
-    FieldName.STACKTRACE
-  ];
-
-  /// For log field open
-  String customOpeningDivider = " ";
-
-  /// For log field close
-  String customClosingDivider = " ";
-
-  /// Delimiter for CSV files
-  String csvDelimiter = "";
+  /// Log data format
+  String outputFormat = "{{time}} {{level}} [{{class}}:{{method}}] - {{message}} {{exception}} {{stacktrace}}";
 
   /// Encryption enabled
   String encryption = "";
