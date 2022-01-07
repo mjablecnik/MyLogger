@@ -9,7 +9,7 @@ class FLog {
   static final _flogDao = FlogDao.instance;
 
   //local storage
-  static final LogsStorage _storage = LogsStorage.instance;
+  static final LogStorage _storage = LogStorage.instance;
 
   //logs configuration
   static LogsConfig _config = LogsConfig();
@@ -247,7 +247,7 @@ class FLog {
   static void printFileLogs() async {
     print(Constants.PRINT_LOG_MSG);
 
-    _storage.readLogsToFile().then(print);
+    _storage.readLogsFromFile().then(print);
   }
 
   /// exportLogs

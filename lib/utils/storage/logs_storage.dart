@@ -3,18 +3,21 @@ import 'dart:io';
 import 'package:f_logs/f_logs.dart';
 import 'package:path_provider/path_provider.dart';
 
-class LogsStorage {
-  static final LogsStorage _singleton = LogsStorage._();
+class LogStorage {
+  static final LogStorage _singleton = LogStorage._();
 
   /// Singleton accessor
-  static LogsStorage get instance => _singleton;
+  static LogStorage get instance => _singleton;
 
   // A private constructor. Allows us to create instances of LogsStorage
   // only from within the LogsStorage class itself.
-  LogsStorage._();
+  LogStorage._();
 
-  // Filing methods:------------------------------------------------------------
-  Future<String?> get _localPath async {
+  String? _localPath;
+  File? _localFile;
+
+  Future<String> _getLocalPath() async {
+    if (_localPath != null) return _localPath!;
     var directory;
 
     if (Platform.isIOS) {
@@ -26,15 +29,14 @@ class LogsStorage {
     return directory.path;
   }
 
-  Future<File> get _localFile async {
-    final path = "${await _localPath}/${Constants.DIRECTORY_NAME}";
+  Future<File> _getLocalFile() async {
+    if (_localFile != null) return _localFile!;
+
+    final path = "${await _getLocalPath()}/${Constants.DIRECTORY_NAME}";
 
     //creating directory
-    Directory(path).create()
-        // The created directory is returned as a Future.
-        .then((Directory directory) {
-      print(directory.path);
-    });
+    Directory directory = await Directory(path).create();
+    print(directory.path);
 
     //opening file
     var file = File("$path/flog.txt");
@@ -51,9 +53,9 @@ class LogsStorage {
   }
 
   /// Read the Log-String from file
-  Future<String> readLogsToFile() async {
+  Future<String> readLogsFromFile() async {
     try {
-      final file = await _localFile;
+      final file = await _getLocalFile();
 
       // Read the file
       var contents = await file.readAsString();
@@ -67,7 +69,7 @@ class LogsStorage {
 
   /// Writes the `log`-String to file
   Future<File> writeLogsToFile(String log) async {
-    final file = await _localFile;
+    final file = await _getLocalFile();
 
     // Write the file
     return file.writeAsString('$log');
