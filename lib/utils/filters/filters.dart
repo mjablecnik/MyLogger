@@ -16,16 +16,16 @@ class Filters {
     var timestampFilters = <Filter>[];
 
     //check to see if dataLogsType is not null
-    if (dataLogsType != null && dataLogsType.length > 0) {
+    if (dataLogsType?.length.compareTo(0) == 1) {
       final dataLogTypeFilter =
-          Filter.inList(DBConstants.FIELD_DATA_LOG_TYPE, dataLogsType);
+          Filter.inList(DBConstants.FIELD_DATA_LOG_TYPE, dataLogsType!);
       filters.add(dataLogTypeFilter);
     }
 
     //check to see if logLevels is not null
-    if (logLevels != null && logLevels.length > 0) {
+    if (logLevels?.length.compareTo(0) == 1) {
       final logLevelsFilter =
-          Filter.inList(DBConstants.FIELD_LOG_LEVEL, logLevels);
+          Filter.inList(DBConstants.FIELD_LOG_LEVEL, logLevels!);
       filters.add(logLevelsFilter);
     }
 
