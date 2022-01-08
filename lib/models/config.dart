@@ -37,7 +37,7 @@ class LogsConfig {
   String defaultDataLogType = 'NONE';
 
   /// Log data format
-  String outputFormat = "{{time}} {{level}} [{{class}}:{{method}}] DataLogType.{{dataLogType}} -> {{message}} {{exception}} {{stacktrace}}";
+  String outputFormat = OutputLogFormat.FULL;
 
   /// Encryption enabled
   String encryption = "";

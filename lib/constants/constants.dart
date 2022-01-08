@@ -38,6 +38,13 @@ class TimestampFormat {
   static const TIME_FORMAT_SIMPLE = "kk:mm:ss";
 }
 
+class OutputLogFormat {
+  static const DEFAULT = "{{time}} {{level}} [{{class}}:{{method}}] -> {{message}} {{exception}} {{stacktrace}}";
+  static const BASIC = "{{time}} {{level}} {{message}}";
+  static const SIMPLE = "{{time}} {{level}} - {{message}} {{exception}} {{stacktrace}}";
+  static const FULL = "{{time}} {{level}} [{{class}}:{{method}}] DataLogType.{{dataLogType}} -> {{message}} {{exception}} {{stacktrace}}";
+}
+
 enum LogLevel { ALL, TRACE, DEBUG, INFO, WARNING, ERROR, SEVERE, FATAL, OFF }
 
 enum FilterType { LAST_HOUR, LAST_24_HOURS, TODAY, WEEK, ALL }
