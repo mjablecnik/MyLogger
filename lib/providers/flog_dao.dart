@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:f_logs/f_logs.dart';
 import 'package:sembast/sembast.dart';
 
-import 'app_database.dart';
 
 class FlogDao {
   // A Store with int keys and Map<String, dynamic> values.
