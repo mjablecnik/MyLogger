@@ -43,7 +43,7 @@ class AppDatabase {
     // Get a platform-specific directory where persistent app data can be stored
     final directory = await getApplicationSupportDirectory();
 
-    final configuration = FLog.getDefaultConfigurations();
+    final configuration = FLog.getConfiguration();
 
     // Path with the form: /platform-specific-directory/demo.db
     final dbPath = join(directory.path, DBConstants.DB_NAME);

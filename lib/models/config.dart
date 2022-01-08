@@ -31,10 +31,13 @@ class LogsConfig {
   LogLevel activeLogLevel = LogLevel.INFO;
 
   /// Like Network, Database, Location etc
-  List<String> dataLogTypes = [DataLogType.DEFAULT.toString()];
+  var dataLogType = DataLogType;
+
+  /// Show this string if DataLogType is null
+  String defaultDataLogType = 'NONE';
 
   /// Log data format
-  String outputFormat = "{{time}} {{level}} [{{class}}:{{method}}] - {{message}} {{exception}} {{stacktrace}}";
+  String outputFormat = "{{time}} {{level}} [{{class}}:{{method}}] DataLogType.{{dataLogType}} -> {{message}} {{exception}} {{stacktrace}}";
 
   /// Encryption enabled
   String encryption = "";

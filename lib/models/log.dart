@@ -1,3 +1,5 @@
+import 'package:f_logs/utils/utils.dart';
+
 import '../f_logs.dart';
 
 class Log {
@@ -10,7 +12,7 @@ class Log {
   String? text;
   String? timestamp;
   String? exception;
-  String? dataLogType;
+  Enum? dataLogType;
   int? timeInMillis;
   LogLevel? logLevel;
   String? stacktrace;
@@ -25,7 +27,15 @@ class Log {
     this.logLevel,
     this.dataLogType,
     this.stacktrace,
-  });
+  }) {
+    if (dataLogType != null) {
+      final config = FLog.getConfiguration();
+
+      if (dataLogType.runtimeType != config.dataLogType) {
+        throw "DataLogType is not: ${config.dataLogType}";
+      }
+    }
+  }
 
   /// Converts class to json
   Map<String, dynamic> toJson() {
@@ -36,14 +46,15 @@ class Log {
       'timestamp': timestamp,
       'timeInMillis': timeInMillis,
       'exception': exception,
-      'dataLogType': dataLogType,
-      'logLevel': logLevel.toString(),
+      'dataLogType': Utils.fromEnumToString(dataLogType),
+      'logLevel': Utils.fromEnumToString(logLevel),
       'stacktrace': stacktrace,
     };
   }
 
   /// create `Log` from json
-  static Log fromJson(Map<String, dynamic> json) {
+  factory Log.fromJson(Map<String, dynamic> json) {
+    final config = FLog.getConfiguration();
     return Log(
       className: json['className'],
       methodName: json['methodName'],
@@ -51,8 +62,8 @@ class Log {
       timestamp: json['timestamp'],
       timeInMillis: json['timeInMillis'],
       exception: json['exception'],
-      dataLogType: json['dataLogType'],
-      logLevel: LogLevelConverter.fromStringToEnum(json['logLevel']),
+      dataLogType: Utils.toEnum(config.dataLogType, json['dataLogType']),
+      logLevel: Utils.toEnum(LogLevel, json['logLevel']),
       stacktrace: json['stacktrace'],
     );
   }

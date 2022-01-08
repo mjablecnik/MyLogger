@@ -34,7 +34,7 @@ class FLog {
     required String text,
     required LogLevel type,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   }) async {
     // prevent to write LogLevel.ALL and LogLevel.OFF to db
@@ -56,7 +56,7 @@ class FLog {
     String? methodName,
     required String text,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.TRACE, exception, dataLogType, stacktrace);
@@ -75,7 +75,7 @@ class FLog {
     String? methodName,
     required String text,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.DEBUG, exception, dataLogType, stacktrace);
@@ -94,7 +94,7 @@ class FLog {
     String? methodName,
     required String text,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.INFO, exception, dataLogType, stacktrace);
@@ -113,7 +113,7 @@ class FLog {
     String? methodName,
     required String text,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.WARNING, exception, dataLogType, stacktrace);
@@ -132,7 +132,7 @@ class FLog {
     String? methodName,
     required String text,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.ERROR, exception, dataLogType, stacktrace);
@@ -151,7 +151,7 @@ class FLog {
     String? methodName,
     required String text,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.SEVERE, exception, dataLogType, stacktrace);
@@ -170,7 +170,7 @@ class FLog {
     String? methodName,
     required String text,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   }) async {
     _logThis(className, methodName, text, LogLevel.FATAL, exception, dataLogType, stacktrace);
@@ -325,8 +325,8 @@ class FLog {
 
   /// getDefaultConfigurations
   ///
-  /// Returns the default configuration
-  static LogsConfig getDefaultConfigurations() {
+  /// Returns configuration
+  static LogsConfig getConfiguration() {
     return _config;
   }
 
@@ -346,7 +346,7 @@ class FLog {
     String text,
     LogLevel type,
     dynamic exception,
-    String? dataLogType,
+    Enum? dataLogType,
     StackTrace? stacktrace,
   ) {
     // This variable can be ClassName.MethodName or only a function name, when it doesn't belong to a class, e.g. main()

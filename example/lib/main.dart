@@ -35,7 +35,7 @@ init() {
 //    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_2;
 
   /// Configuration example 3 Format Custom
-  LogsConfig config = FLog.getDefaultConfigurations()
+  LogsConfig config = FLog.getConfiguration()
     ..isDevelopmentDebuggingEnabled = false
     ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_3;
 
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
         _buildButton("Log Event with StackTrace", () {
           FLog.error(
             text: "My log",
-            dataLogType: "Zubair",
+            dataLogType: DataLogType.DEVICE,
             className: "Home",
             exception: Exception("Exception and StackTrace"),
             stacktrace: StackTrace.current,
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
 //    FLog.getDefaultConfigurations()..activeLogLevel = _newLogLevel;
     FLog.info(
         text:
-            'LogLevel set to: ${FLog.getDefaultConfigurations().activeLogLevel}.');
+            'LogLevel set to: ${FLog.getConfiguration().activeLogLevel}.');
   }
 
   void logException() {
@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
     } on Exception catch (exception) {
       FLog.error(
         text: "Exception text/descritption goes here",
-        dataLogType: "Exception (the type could be anything)",
+        dataLogType: DataLogType.ERRORS,
         className: "Home",
         exception: exception,
       );
@@ -222,7 +222,7 @@ class _HomePageState extends State<HomePage> {
     } on Error catch (error) {
       FLog.error(
         text: "Error text/descritption goes here",
-        dataLogType: "Error (the type could be anything)",
+        dataLogType: DataLogType.ERRORS,
         className: "Home",
         exception: error,
       );
@@ -234,7 +234,7 @@ class _HomePageState extends State<HomePage> {
       className: "HomePage",
       methodName: "_buildRow1",
       text: "Log text/descritption goes here",
-      dataLogType: "Warning (the type could be anything)",
+      dataLogType: DataLogType.DEFAULT,
     );
   }
 
@@ -243,7 +243,7 @@ class _HomePageState extends State<HomePage> {
       className: "HomePage",
       methodName: "_buildRow1",
       text: "Log text/descritption goes here",
-      dataLogType: "Trace (the type could be anything)",
+      dataLogType: DataLogType.DEFAULT,
     );
   }
 
