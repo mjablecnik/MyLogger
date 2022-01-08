@@ -183,7 +183,7 @@ class FLog {
   static void printLogs() async {
     print(Constants.PRINT_LOG_MSG);
 
-    _getAllLogs().then((logs) {
+    _flogDao.getLogs().then((logs) {
       var buffer = StringBuffer();
 
       if (logs.length > 0) {
@@ -211,26 +211,26 @@ class FLog {
   }) async {
     print(Constants.PRINT_DATA_LOG_MSG);
 
-    _getAllSortedByFilter(
+    final logs = await _flogDao.getLogs(
       filters: Filters.generateFilters(
-          dataLogsType: dataLogsType,
-          logLevels: logLevels,
-          startTimeInMillis: startTimeInMillis,
-          endTimeInMillis: endTimeInMillis,
-          filterType: filterType),
-    ).then((logs) {
-      var buffer = StringBuffer();
+        dataLogsType: dataLogsType,
+        logLevels: logLevels,
+        startTimeInMillis: startTimeInMillis,
+        endTimeInMillis: endTimeInMillis,
+        filterType: filterType,
+      ),
+    );
 
-      if (logs.isNotEmpty) {
-        logs.forEach((log) {
-          buffer.write(Formatter.format(log, _config));
-        });
-        print(buffer.toString());
-      } else {
-        print("No logs found!");
-      }
-      buffer.clear();
-    });
+    var buffer = StringBuffer();
+    if (logs.isNotEmpty) {
+      logs.forEach((log) {
+        buffer.write(Formatter.format(log, _config));
+      });
+      print(buffer.toString());
+    } else {
+      print("No logs found!");
+    }
+    buffer.clear();
   }
 
   /// printFileLogs
@@ -251,7 +251,7 @@ class FLog {
     print(Constants.PRINT_EXPORT_MSG);
 
     //get all logs and write to file
-    final logs = await _getAllLogs();
+    final logs = await _flogDao.getLogs();
 
     logs.forEach((log) {
       buffer.write(Formatter.format(log, _config));
@@ -264,13 +264,6 @@ class FLog {
     return file;
   }
 
-  /// getAllLogs
-  ///
-  /// This will return the list of logs stored in database
-  static Future<List<Log>> getAllLogs() async {
-    return await _flogDao.getAllLogs();
-  }
-
   /// getAllLogsByFilter
   ///
   /// This will return the list of logs stored based on the provided filters
@@ -280,7 +273,7 @@ class FLog {
       int? startTimeInMillis,
       int? endTimeInMillis,
       FilterType? filterType}) async {
-    return await _flogDao.getAllSortedByFilter(
+    return await _flogDao.getLogs(
       filters: Filters.generateFilters(
         dataLogsType: dataLogsType,
         logLevels: logLevels,
@@ -296,14 +289,14 @@ class FLog {
   /// This will return the list of logs stored based on the custom filters
   /// provided by the user
   static Future<List<Log>> getAllLogsByCustomFilter({List<Filter>? filters}) async {
-    return await _flogDao.getAllSortedByFilter(filters: filters!);
+    return await _flogDao.getLogs(filters: filters!);
   }
 
   /// clearLogs
   ///
   /// This will clear all the logs stored in database
   static Future<void> clearLogs() async {
-    await _flogDao.deleteAll();
+    await _flogDao.deleteLogs();
     print("Logs Cleared!");
   }
 
@@ -311,7 +304,7 @@ class FLog {
   ///
   /// This will delete logs by provided filters
   static Future<void> deleteAllLogsByFilter({List<Filter>? filters}) async {
-    var deleted = await _flogDao.deleteAllLogsByFilter(filters: filters!);
+    var deleted = await _flogDao.deleteLogs(filters: filters!);
     print("Deleted $deleted logs");
   }
 
@@ -347,8 +340,15 @@ class FLog {
   /// @param methodName the method name
   /// @param text         the text
   /// @param type         the type
-  static void _logThis(String? className, String? methodName, String text, LogLevel type, dynamic exception,
-      String? dataLogType, StackTrace? stacktrace) {
+  static void _logThis(
+    String? className,
+    String? methodName,
+    String text,
+    LogLevel type,
+    dynamic exception,
+    String? dataLogType,
+    StackTrace? stacktrace,
+  ) {
     // This variable can be ClassName.MethodName or only a function name, when it doesn't belong to a class, e.g. main()
     var member = Trace.current().frames[2].member!;
 
@@ -396,23 +396,9 @@ class FLog {
     _writeLogs(log);
   }
 
-  /// _getAllLogs
-  ///
-  /// This will return the list of logs stored in database
-  static Future<List<Log>> _getAllLogs() async {
-    return await _flogDao.getAllLogs();
-  }
-
-  /// _getAllSortedByFilter
-  ///
-  /// This will return the list of logs sorted by provided filters
-  static Future<List<Log>> _getAllSortedByFilter({List<Filter>? filters}) async {
-    return await _flogDao.getAllSortedByFilter(filters: filters!);
-  }
-
   /// _writeLogs
   ///
-  /// This will write logs to local database
+  /// Will write logs to local database
   static _writeLogs(Log log) async {
     if (_isLogLevelValid(log.logLevel!)) {
       if (_config.isDebuggable) {
