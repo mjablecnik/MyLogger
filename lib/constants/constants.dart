@@ -4,20 +4,10 @@ class Constants {
   /// Directory
   static const DIRECTORY_NAME = 'FLogs';
 
-  /// Missing Initialization Exception
-  static const EXCEPTION_NOT_INIT =
-      // ignore: lines_longer_than_80_chars
-      'FLog is not initialized! Please provide FLog configuration by calling FLog.applyConfigurations(LogsConfig config) in your application class';
-
   /// Encryption key null exception
   static const EXCEPTION_NULL_KEY =
       // ignore: lines_longer_than_80_chars
       'Encryption key is not provided, please provide encryption key in LogsConfig';
-
-  /// Null Logs Level Exception
-  static const EXCEPTION_NULL_LOGS_LEVEL =
-      // ignore: lines_longer_than_80_chars
-      'ActiveLogLevel is not provided or null, please provide activeLogLevel key in LogsConfig';
 
   // Print Messages
   static const PRINT_EXPORT_MSG =
@@ -33,4 +23,29 @@ class Constants {
   static const PRINT_DATA_LOG_MSG =
       // ignore: lines_longer_than_80_chars
       '\n--------------------------------------------------------------------------------------------\nPrinting Data Logs: This might take a while depending upon the size\n----------------------------------------------------------------------------------------';
+}
+
+class TimestampFormat {
+  static const DEFAULT = "";
+  static const DATE_FORMAT_1 = "ddMMyyyy";
+  static const DATE_FORMAT_2 = "MM/dd/yyyy";
+  static const TIME_FORMAT_FULL_JOINED = "ddMMyyyy_kkmmss_a";
+  static const TIME_FORMAT_FULL_1 = "dd MMMM yyyy kk:mm:ss";
+  static const TIME_FORMAT_FULL_2 = "MM:dd:yyyy hh:mm:ss a";
+  static const TIME_FORMAT_FULL_3 = "yyyy-MM-dd kk:mm:ss";
+  static const TIME_FORMAT_24_FULL = "dd/MM/yyyy kk:mm:ss";
+  static const TIME_FORMAT_READABLE = "dd MMMM yyyy hh:mm:ss a";
+  static const TIME_FORMAT_SIMPLE = "kk:mm:ss";
+}
+
+enum FilterType { LAST_HOUR, LAST_24_HOURS, TODAY, WEEK, ALL }
+
+enum DataLogType {
+  DEFAULT,
+  DEVICE,
+  LOCATION,
+  NOTIFICATION,
+  NETWORK,
+  DATABASE,
+  ERRORS
 }
