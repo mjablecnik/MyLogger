@@ -41,34 +41,28 @@ class AppDatabase {
 
   Future _openDatabase() async {
     // Get a platform-specific directory where persistent app data can be stored
-    final appDocumentDir = await getApplicationDocumentsDirectory();
+    final directory = await getApplicationSupportDirectory();
+
+    final configuration = FLog.getDefaultConfigurations();
 
     // Path with the form: /platform-specific-directory/demo.db
-    final dbPath = join(appDocumentDir.path, DBConstants.DB_NAME);
+    final dbPath = join(directory.path, DBConstants.DB_NAME);
 
-    // Check to see if encryption is set, then provide codec
-    // else init normal db with path
-    var database;
-    if (FLog.getDefaultConfigurations().encryption.isNotEmpty &&
-        FLog.getDefaultConfigurations().encryptionKey.isNotEmpty) {
+    var codec;
+
+    if (configuration.encryption.isNotEmpty && configuration.encryptionKey.isNotEmpty) {
       // Initialize the encryption codec with a user password
-      var codec;
-      if (FLog.getDefaultConfigurations().encryption == 'xxtea') {
-        codec = getXXTeaSembastCodec(
-            password: FLog.getDefaultConfigurations().encryptionKey);
-      } else if (FLog.getDefaultConfigurations().encryption == 'aes-gcm') {
-        codec = getGCMSembastCodec(
-            password: FLog.getDefaultConfigurations().encryptionKey);
+      if (configuration.encryption == 'xxtea') {
+        codec = getXXTeaSembastCodec(password: configuration.encryptionKey);
+      } else if (configuration.encryption == 'aes-gcm') {
+        codec = getGCMSembastCodec(password: configuration.encryptionKey);
       } else {
         throw 'Unsupported encryption';
       }
-
-      database = await databaseFactoryIo.openDatabase(dbPath, codec: codec);
-    } else {
-      database = await databaseFactoryIo.openDatabase(dbPath);
     }
 
-    // Any code awaiting the Completer's future will now start executing
+    final database = await databaseFactoryIo.openDatabase(dbPath, codec: codec);
+
     _dbOpenCompleter!.complete(database);
   }
 }
