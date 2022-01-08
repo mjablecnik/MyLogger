@@ -38,14 +38,8 @@ class TimestampFormat {
   static const TIME_FORMAT_SIMPLE = "kk:mm:ss";
 }
 
+enum LogLevel { ALL, TRACE, DEBUG, INFO, WARNING, ERROR, SEVERE, FATAL, OFF }
+
 enum FilterType { LAST_HOUR, LAST_24_HOURS, TODAY, WEEK, ALL }
 
-enum DataLogType {
-  DEFAULT,
-  DEVICE,
-  LOCATION,
-  NOTIFICATION,
-  NETWORK,
-  DATABASE,
-  ERRORS
-}
+enum DataLogType { DEFAULT, DEVICE, LOCATION, NOTIFICATION, NETWORK, DATABASE, ERRORS }

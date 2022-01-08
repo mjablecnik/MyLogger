@@ -5,7 +5,6 @@ export 'package:f_logs/providers/flog_dao.dart';
 export 'package:f_logs/models/flog.dart';
 export 'package:f_logs/models/config.dart';
 export 'package:f_logs/models/log.dart';
-export 'package:f_logs/constants/log_level.dart';
 export 'package:f_logs/utils/date_time.dart';
 export 'package:f_logs/utils/encryption/xxtea.dart';
 export 'package:f_logs/utils/filters.dart';
