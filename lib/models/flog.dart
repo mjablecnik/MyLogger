@@ -388,7 +388,7 @@ class FLog {
       logLevel: type,
       dataLogType: dataLogType,
       exception: exception?.toString(),
-      timestamp: DateTimeUtils.getCurrentTimestamp(_config),
+      timestamp: DateTimeUtils.getCurrentTime(_config),
       timeInMillis: DateTimeUtils.getCurrentTimeInMillis(),
       stacktrace: formattedStackTrace ?? stacktrace?.toString(),
     );

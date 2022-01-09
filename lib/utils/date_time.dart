@@ -7,11 +7,11 @@ class DateTimeUtils {
   //DateTime Methods:-----------------------------------------------------------
   static int getCurrentTimeInMillis() => DateTime.now().millisecondsSinceEpoch;
 
-  static String getCurrentTimestamp(LogsConfig config) {
+  static String getCurrentTime(LogsConfig config) {
     if (config.timestampFormat.isEmpty) {
-      return "${DateTime.now()}";
+      return DateTime.now().toString();
     } else {
-      return DateFormat(config.timestampFormat.toString()).format(DateTime.now());
+      return DateFormat(config.timestampFormat).format(DateTime.now());
     }
   }
 
