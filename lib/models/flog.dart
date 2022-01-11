@@ -12,6 +12,8 @@ class FLog {
 
   static applyConfig(LogConfig config) => LogsConfiguration.instance.applyConfig(config);
 
+  static LogsProvider get logs => LogsProvider.instance;
+
   //Public Methods:-------------------------------------------------------------
   /// logThis
   ///

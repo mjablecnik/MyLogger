@@ -31,7 +31,7 @@ class LogConfig {
   LogLevel activeLogLevel = LogLevel.INFO;
 
   /// Like Network, Database, Location etc
-  var dataLogType = DataLogType;
+  List<Enum> dataLogTypeValues = DataLogType.values;
 
   /// Show this string if DataLogType is null
   String defaultDataLogType = 'NONE';

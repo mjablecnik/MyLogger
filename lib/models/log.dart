@@ -29,8 +29,9 @@ class Log {
     this.stacktrace,
   }) {
     if (dataLogType != null) {
-      if (dataLogType.runtimeType != FLog.config.dataLogType) {
-        throw "DataLogType is not: ${FLog.config.dataLogType}";
+      final dataLogType = FLog.config.dataLogTypeValues.first.runtimeType;
+      if (this.dataLogType.runtimeType != dataLogType) {
+        throw "DataLogType is not: $dataLogType";
       }
     }
   }
@@ -59,9 +60,14 @@ class Log {
       timestamp: json['timestamp'],
       timeInMillis: json['timeInMillis'],
       exception: json['exception'],
-      dataLogType: Utils.toEnum(FLog.config.dataLogType, json['dataLogType']),
-      logLevel: Utils.toEnum(LogLevel, json['logLevel']),
+      dataLogType: Utils.toEnum(FLog.config.dataLogTypeValues, json['dataLogType']),
+      logLevel: Utils.toEnum(LogLevel.values, json['logLevel']),
       stacktrace: json['stacktrace'],
     );
+  }
+
+  @override
+  String toString() {
+    return Formatter.format(this, FLog.config);
   }
 }

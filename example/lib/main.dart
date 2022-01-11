@@ -103,9 +103,9 @@ class _HomePageState extends State<HomePage> {
           logTrace();
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
-        _buildButton("Print Logs", () {
-          // TODO: Get logs and print
-          //FLog.printLogs();
+        _buildButton("Print Logs", () async {
+          print("\nPrinting all logs:");
+          FLog.logs.getAll().then((logs) => logs.forEach(print));
         }),
       ],
     );
