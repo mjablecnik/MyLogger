@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:f_logs/f_logs.dart';
+import 'package:f_logs/utils/utils.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:f_logs/models/file.dart' as model;
 
 class LogsExporter {
   static final LogsExporter _singleton = LogsExporter._();
@@ -14,9 +16,8 @@ class LogsExporter {
   LogsExporter._();
 
   String? _localPath;
-  File? _localFile;
 
-  Future<String> _getLocalPath() async {
+  Future<String> getDefaultPath() async {
     if (_localPath != null) return _localPath!;
     var directory;
 
@@ -26,37 +27,27 @@ class LogsExporter {
       directory = await getExternalStorageDirectory();
     }
 
-    return directory.path;
+    _localPath = "${directory.path}/${Constants.DIRECTORY_NAME}";
+    return _localPath!;
   }
 
-  Future<File> _getLocalFile({required String name}) async {
-    if (_localFile != null) return _localFile!;
-
-    final path = "${await _getLocalPath()}/${Constants.DIRECTORY_NAME}";
-
-    Directory directory = await Directory(path).create();
-    print(directory.path);
-
-    return File("$path/$name.txt");
+  Future<File> prepareFile(model.File file) async {
+    final path = file.path ?? await getDefaultPath();
+    await Directory(path).create();
+    final fileType = Utils.fromEnumToString(file.type).toLowerCase();
+    return File("$path/${file.name}.$fileType");
   }
 
-  /// Read the Log-String from file
-  Future<String> readLogsFromFile({required String fileName}) async {
-    try {
-      final file = await _getLocalFile(name: fileName);
-      var contents = await file.readAsString();
-      return contents;
-    } catch (e) {
-      return "Unable to read file";
-    }
-  }
+  Future<File> writeLogsToFile({required List<Log> logs, required model.File file}) async {
+    final outputFile = await prepareFile(file);
 
-  /// Writes the `log`-String to file
-  Future<File> writeLogsToFile({required List<Log> logs, required String fileName}) async {
-    final file = await _getLocalFile(name: fileName);
     String logLines = "";
     logs.forEach((logLine) => logLines += "$logLine\n");
-    await file.writeAsString(logLines);
-    return file;
+    if (file.type == FileType.TXT) {
+      await outputFile.writeAsString(logLines);
+    } else {
+      // TODO: Implement other types
+    }
+    return outputFile;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:f_logs/f_logs.dart';
+import 'package:f_logs/models/file.dart';
 import 'package:f_logs/services/logs_configuration.dart';
 
 class LogsProvider {
@@ -36,14 +37,17 @@ class LogsProvider {
     LogsDatabase.instance.delete();
   }
 
-  Future<String> export({String fileName: "LogsExport"}) async {
-    final logs = await getAll();
-    final file = await LogsExporter.instance.writeLogsToFile(logs: logs, fileName: fileName);
-    return file.path;
+  Future<String> export(File? file) async {
+    final logs = getAll();
+    final output = await LogsExporter.instance.writeLogsToFile(
+      file: file ?? config.defaultExportFile,
+      logs: await logs,
+    );
+    return output.path;
   }
 
   sendToServer({required Uri serverAddress}) async {
-    final file = await export();
+    final file = await export(config.defaultExportFile);
     // TODO: Send exported logs into remote server
     // TODO: Delete ZIP file after send
   }
