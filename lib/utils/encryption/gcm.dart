@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:pointycastle/block/aes_fast.dart';
+import 'package:pointycastle/block/aes.dart';
 import 'package:pointycastle/block/modes/gcm.dart';
 import 'package:pointycastle/pointycastle.dart';
 import 'package:sembast/sembast.dart';
@@ -20,7 +20,7 @@ class _GCMEncoder extends Converter<Map<String, dynamic>, String> {
 
   @override
   String convert(Map<String, dynamic> input) {
-    final cipher = GCMBlockCipher(AESFastEngine());
+    final cipher = GCMBlockCipher(AESEngine());
     final iv = randomGenerator.nextBytes(96 ~/ 8);
     final encryptionParameters = AEADParameters(
       KeyParameter(key),
@@ -43,7 +43,7 @@ class _GCMDecoder extends Converter<String, Map<String, dynamic>> {
 
   @override
   Map<String, dynamic> convert(String input) {
-    final cipher = GCMBlockCipher(AESFastEngine());
+    final cipher = GCMBlockCipher(AESEngine());
     final inputData = base64Decode(input);
     final iv = inputData.sublist(0, 12);
     final data = inputData.sublist(12);
