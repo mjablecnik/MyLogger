@@ -114,9 +114,9 @@ class _HomePageState extends State<HomePage> {
   _buildRow2() {
     return Row(
       children: <Widget>[
-        _buildButton("Export Logs", () {
-          // TODO: Export
-          //FLog.exportLogs();
+        _buildButton("Export Logs", () async {
+          final exportedFile = await FLog.logs.export();
+          print("Logs are exported into: $exportedFile");
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Clear Logs", () {

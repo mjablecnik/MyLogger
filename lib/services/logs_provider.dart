@@ -36,15 +36,15 @@ class LogsProvider {
     LogsDatabase.instance.delete();
   }
 
-  export() async {
+  Future<String> export({String fileName: "LogsExport"}) async {
     final logs = await getAll();
-    // TODO: make export into ZIP file
-    return "<path of exported file file>";
+    final file = await LogsExporter.instance.writeLogsToFile(logs: logs, fileName: fileName);
+    return file.path;
   }
-  
+
   sendToServer({required Uri serverAddress}) async {
     final file = await export();
-    // TODO: Send exported logs into remote server 
+    // TODO: Send exported logs into remote server
     // TODO: Delete ZIP file after send
   }
 }
