@@ -35,11 +35,11 @@ init() {
 //    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_2;
 
   /// Configuration example 3 Format Custom
-  LogsConfig config = FLog.getConfiguration()
+  LogConfig config = FLog.config
     ..isDevelopmentDebuggingEnabled = false
     ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_3;
 
-  FLog.applyConfigurations(config);
+  FLog.applyConfig(config);
 }
 
 class CustomFormatter {
@@ -78,7 +78,6 @@ class _HomePageState extends State<HomePage> {
               _buildRow1(context),
               _buildRow2(),
               _buildRow3(),
-              _buildRow4(),
             ],
           ),
         ),
@@ -105,7 +104,8 @@ class _HomePageState extends State<HomePage> {
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Print Logs", () {
-          FLog.printLogs();
+          // TODO: Get logs and print
+          //FLog.printLogs();
         }),
       ],
     );
@@ -115,41 +115,19 @@ class _HomePageState extends State<HomePage> {
     return Row(
       children: <Widget>[
         _buildButton("Export Logs", () {
-          FLog.exportLogs();
+          // TODO: Export
+          //FLog.exportLogs();
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Clear Logs", () {
-          FLog.clearLogs();
+          // TODO: Clear logs
+          //FLog.clearLogs();
         }),
       ],
     );
   }
 
   _buildRow3() {
-    return Row(
-      children: <Widget>[
-        _buildButton("Print File Logs", () {
-          FLog.printFileLogs();
-        }),
-        Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
-        _buildButton("Print Data Logs", () {
-          FLog.printDataLogs(dataLogsType: [
-            DataLogType.DEVICE.toString(),
-            "Zubair",
-            "Jawad"
-          ], logLevels: [
-            LogLevel.ERROR.toString(),
-            LogLevel.WARNING.toString()
-          ], filterType: FilterType.WEEK
-//            startTimeInMillis: 1556132400000,
-//            endTimeInMillis: 1556650800000,
-              );
-        }),
-      ],
-    );
-  }
-
-  _buildRow4() {
     return Row(
       children: <Widget>[
         _buildButton("Log Event with StackTrace", () {
@@ -163,10 +141,11 @@ class _HomePageState extends State<HomePage> {
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Delete Logs by Filter (older then 10 seconds)", () {
-          FLog.deleteAllLogsByFilter(filters: [
-            Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS,
-                DateTime.now().millisecondsSinceEpoch - 1000 * 10)
-          ]);
+          // TODO: Delete logs saved for last 10 seconds
+          //FLog.deleteAllLogsByFilter(filters: [
+          //  Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS,
+          //      DateTime.now().millisecondsSinceEpoch - 1000 * 10)
+          //]);
         }),
       ],
     );
@@ -197,7 +176,7 @@ class _HomePageState extends State<HomePage> {
 //    FLog.getDefaultConfigurations()..activeLogLevel = _newLogLevel;
     FLog.info(
         text:
-            'LogLevel set to: ${FLog.getConfiguration().activeLogLevel}.');
+            'LogLevel set to: ${FLog.config.activeLogLevel}.');
   }
 
   void logException() {

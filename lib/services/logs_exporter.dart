@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:f_logs/f_logs.dart';
 import 'package:path_provider/path_provider.dart';
 
-class LogStorage {
-  static final LogStorage _singleton = LogStorage._();
+class LogsExporter {
+  static final LogsExporter _singleton = LogsExporter._();
 
   /// Singleton accessor
-  static LogStorage get instance => _singleton;
+  static LogsExporter get instance => _singleton;
 
   // A private constructor. Allows us to create instances of LogsStorage
   // only from within the LogsStorage class itself.
-  LogStorage._();
+  LogsExporter._();
 
   String? _localPath;
   File? _localFile;

@@ -2,7 +2,7 @@ import 'package:f_logs/f_logs.dart';
 
 typedef String? StackTraceFormatter(StackTrace stackTrace);
 
-class LogsConfig {
+class LogConfig {
   /// print logs in Logcat
   bool isDebuggable = true;
 

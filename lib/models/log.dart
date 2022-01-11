@@ -29,10 +29,8 @@ class Log {
     this.stacktrace,
   }) {
     if (dataLogType != null) {
-      final config = FLog.getConfiguration();
-
-      if (dataLogType.runtimeType != config.dataLogType) {
-        throw "DataLogType is not: ${config.dataLogType}";
+      if (dataLogType.runtimeType != FLog.config.dataLogType) {
+        throw "DataLogType is not: ${FLog.config.dataLogType}";
       }
     }
   }
@@ -54,7 +52,6 @@ class Log {
 
   /// create `Log` from json
   factory Log.fromJson(Map<String, dynamic> json) {
-    final config = FLog.getConfiguration();
     return Log(
       className: json['className'],
       methodName: json['methodName'],
@@ -62,7 +59,7 @@ class Log {
       timestamp: json['timestamp'],
       timeInMillis: json['timeInMillis'],
       exception: json['exception'],
-      dataLogType: Utils.toEnum(config.dataLogType, json['dataLogType']),
+      dataLogType: Utils.toEnum(FLog.config.dataLogType, json['dataLogType']),
       logLevel: Utils.toEnum(LogLevel, json['logLevel']),
       stacktrace: json['stacktrace'],
     );

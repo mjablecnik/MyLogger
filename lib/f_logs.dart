@@ -1,7 +1,7 @@
 export 'package:f_logs/constants/constants.dart';
 export 'package:f_logs/constants/db_constants.dart';
-export 'package:f_logs/providers/database.dart';
-export 'package:f_logs/providers/flog_dao.dart';
+export 'package:f_logs/services/logs_database.dart';
+export 'package:f_logs/services/logs_provider.dart';
 export 'package:f_logs/models/flog.dart';
 export 'package:f_logs/models/config.dart';
 export 'package:f_logs/models/log.dart';
@@ -9,4 +9,4 @@ export 'package:f_logs/utils/date_time.dart';
 export 'package:f_logs/utils/encryption/xxtea.dart';
 export 'package:f_logs/utils/filters.dart';
 export 'package:f_logs/utils/formatter.dart';
-export 'package:f_logs/providers/log_storage.dart';
+export 'package:f_logs/services/logs_exporter.dart';
