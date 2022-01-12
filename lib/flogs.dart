@@ -11,3 +11,4 @@ export 'package:flogs/models/filter.dart';
 export 'package:flogs/models/file.dart';
 export 'package:flogs/utils/encryption/xxtea.dart';
 export 'package:flogs/services/logs_exporter.dart';
+export 'package:flogs/logs_widget.dart';

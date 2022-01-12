@@ -4,7 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   _init();
-  runApp(HomePage());
+  runApp(MaterialApp(home: HomePage()));
 }
 
 _init() {
@@ -29,21 +29,37 @@ class _HomePageState extends State<HomePage> {
     requestPermission(_permissionGroup);
   }
 
+  _showLogs() => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => Scaffold(
+            appBar: AppBar(
+              title: Text("Log List"),
+              centerTitle: true,
+            ),
+            body: LogsWidget(),
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _buildRow1(context),
-              _buildRow2(),
-              _buildRow3(),
-              _buildRow4(),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("FLog example"),
+        centerTitle: true,
+        actions: [IconButton(onPressed: _showLogs, icon: Icon(Icons.list_alt))],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _buildRow1(context),
+            _buildRow2(),
+            _buildRow3(),
+            _buildRow4(),
+          ],
         ),
       ),
     );
