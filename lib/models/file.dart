@@ -1,4 +1,4 @@
-import 'package:f_logs/constants/constants.dart';
+import 'package:flogs/constants/constants.dart';
 
 class File {
   final String name;

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:f_logs/f_logs.dart';
-import 'package:f_logs/utils/encryption/gcm.dart';
+import 'package:flogs/flogs.dart';
+import 'package:flogs/utils/encryption/gcm.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';

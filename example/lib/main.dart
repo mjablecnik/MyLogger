@@ -1,16 +1,16 @@
-import 'package:f_logs/f_logs.dart';
+import 'package:flogs/flogs.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() {
-  init();
+  _init();
   runApp(HomePage());
 }
 
-init() {
-  LogConfig config = FLog.config
-    ..isDevelopmentDebuggingEnabled = false
-    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_3;
+_init() {
+  var config = FLog.config;
+  config.isDevelopmentDebuggingEnabled = false;
+  config.timestampFormat = TimestampFormat.TIME_FORMAT_FULL_3;
 
   FLog.applyConfig(config);
 }
@@ -55,7 +55,6 @@ class _HomePageState extends State<HomePage> {
         _buildButton("Log Event", () {
           logInfo();
           logException();
-          logError();
           logWarning();
           logTrace();
         }),
@@ -94,7 +93,8 @@ class _HomePageState extends State<HomePage> {
         _buildButton("Print last 10 min Logs", () async {
           print("\nPrinting last 10 min logs:");
           final dateTime = DateTime.now().subtract(Duration(minutes: 10));
-          FLog.logs.getByFilter(LogFilter(startDateTime: dateTime)).then((logs) => logs.forEach(print));
+          final filter = LogFilter(startDateTime: dateTime);
+          FLog.logs.getByFilter(filter).then((logs) => logs.forEach(print));
         }),
       ],
     );
@@ -115,7 +115,8 @@ class _HomePageState extends State<HomePage> {
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Delete Logs by Filter (older then 10 minutes)", () {
           final dateTime = DateTime.now().subtract(Duration(minutes: 10));
-          FLog.logs.deleteByFilter(LogFilter(startDateTime: dateTime)).then((_) => print("Deleted"));
+          final filter = LogFilter(startDateTime: dateTime);
+          FLog.logs.deleteByFilter(filter).then((_) => print("Deleted"));
         }),
       ],
     );
@@ -156,21 +157,6 @@ class _HomePageState extends State<HomePage> {
         dataLogType: DataLogType.ERRORS,
         className: "Home",
         exception: exception,
-      );
-    }
-  }
-
-  void logError() {
-    try {
-      var string = "Zubair";
-      var index = string[-1];
-      debugPrint(index.toString());
-    } on Error catch (error) {
-      FLog.error(
-        text: "Error text/descritption goes here",
-        dataLogType: DataLogType.ERRORS,
-        className: "Home",
-        exception: error,
       );
     }
   }

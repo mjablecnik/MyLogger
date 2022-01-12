@@ -1,4 +1,4 @@
-import 'package:f_logs/constants/db_constants.dart';
+import 'package:flogs/constants/db_constants.dart';
 import 'package:sembast/sembast.dart';
 
 class LogFilter {

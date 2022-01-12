@@ -1,7 +1,7 @@
-name: f_logs
-description: FLog provides quick &amp; simple logging solution. All logs are saved to the DB which can then be exported in files.
-version: 2.0.0-alpha-01
-homepage: https://github.com/zubairehman/Flogs
+name: flogs
+description: FLog provides quick &amp; simple logging solution. All logs are saved to the DB which can be exported into files.
+version: 1.0.0
+homepage: https://github.com/mjablecnik/Flogs
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -10,21 +10,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # An helper to easily exposes a value using InheritedWidget without having to write one.
   sembast: ^3.1.1+1
   path_provider: ^2.0.8
-
-  # This package provides internationalization and localization facilities, including message
-  # translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
   intl: ^0.17.0
 
   # XXTEA is a fast and secure encryption algorithm. This is a XXTEA library for Dart.
   xxtea: ^2.1.0
-
   pointycastle: ^3.5.0
-
-  # Tuple data structure
-  # tuple: ^1.0.2
 
   meta: ^1.7.0
   path: ^1.8.0
