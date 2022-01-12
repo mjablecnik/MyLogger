@@ -121,8 +121,7 @@ class _HomePageState extends State<HomePage> {
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Clear Logs", () {
-          // TODO: Clear logs
-          //FLog.clearLogs();
+          FLog.logs.deleteAll();
         }),
       ],
     );
@@ -158,12 +157,9 @@ class _HomePageState extends State<HomePage> {
           );
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
-        _buildButton("Delete Logs by Filter (older then 10 seconds)", () {
-          // TODO: Delete logs saved for last 10 seconds
-          //FLog.deleteAllLogsByFilter(filters: [
-          //  Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS,
-          //      DateTime.now().millisecondsSinceEpoch - 1000 * 10)
-          //]);
+        _buildButton("Delete Logs by Filter (older then 10 minutes)", () {
+          final dateTime = DateTime.now().subtract(Duration(minutes: 10));
+          FLog.logs.deleteByFilter(LogFilter(startDateTime: dateTime)).then((_) => print("Deleted"));
         }),
       ],
     );

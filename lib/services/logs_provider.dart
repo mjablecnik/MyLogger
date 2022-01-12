@@ -45,8 +45,20 @@ class LogsProvider {
     }
   }
 
-  clear() {
+  deleteAll() {
     LogsDatabase.instance.delete();
+  }
+
+  deleteLastHour() {
+    LogsDatabase.instance.delete(
+      filters: LogFilter.last60Minutes().generate(),
+    );
+  }
+
+  deleteByFilter(LogFilter filter) async {
+    LogsDatabase.instance.delete(
+      filters: filter.generate(),
+    );
   }
 
   Future<String> export([File? file]) async {
