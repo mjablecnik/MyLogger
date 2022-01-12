@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:f_logs/f_logs.dart';
+import 'package:f_logs/constants/constants.dart';
+import 'package:f_logs/models/log.dart';
 import 'package:f_logs/utils/utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:f_logs/models/file.dart' as model;

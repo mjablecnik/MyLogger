@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
               _buildRow1(context),
               _buildRow2(),
               _buildRow3(),
+              _buildRow4(),
             ],
           ),
         ),
@@ -103,7 +104,7 @@ class _HomePageState extends State<HomePage> {
           logTrace();
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
-        _buildButton("Print Logs", () async {
+        _buildButton("Print all Logs", () async {
           print("\nPrinting all logs:");
           FLog.logs.getAll().then((logs) => logs.forEach(print));
         }),
@@ -128,6 +129,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   _buildRow3() {
+    return Row(
+      children: <Widget>[
+        _buildButton("Print last hour Logs", () async {
+          print("\nPrinting last hour logs:");
+          FLog.logs.getLastHour().then((logs) => logs.forEach(print));
+        }),
+        Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
+        _buildButton("Print last 10 min Logs", () async {
+          print("\nPrinting last 10 min logs:");
+          final dateTime = DateTime.now().subtract(Duration(minutes: 10));
+          FLog.logs.getByFilter(LogFilter(startDateTime: dateTime)).then((logs) => logs.forEach(print));
+        }),
+      ],
+    );
+  }
+
+  _buildRow4() {
     return Row(
       children: <Widget>[
         _buildButton("Log Event with StackTrace", () {
@@ -174,9 +192,7 @@ class _HomePageState extends State<HomePage> {
 
 //    final LogLevel _newLogLevel = null;
 //    FLog.getDefaultConfigurations()..activeLogLevel = _newLogLevel;
-    FLog.info(
-        text:
-            'LogLevel set to: ${FLog.config.activeLogLevel}.');
+    FLog.info(text: 'LogLevel set to: ${FLog.config.activeLogLevel}.');
   }
 
   void logException() {

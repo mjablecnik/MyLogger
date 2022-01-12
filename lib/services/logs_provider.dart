@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:f_logs/f_logs.dart';
-import 'package:f_logs/models/file.dart';
-import 'package:f_logs/services/logs_configuration.dart';
 
 class LogsProvider {
   static LogConfig get config => LogsConfiguration.instance.config;
@@ -21,7 +19,21 @@ class LogsProvider {
   }
 
   Future<List<Log>> getAll() async {
-    return await LogsDatabase.instance.select();
+    return await LogsDatabase.instance.select(
+      filters: LogFilter.all().generate(),
+    );
+  }
+
+  Future<List<Log>> getLastHour() async {
+    return await LogsDatabase.instance.select(
+      filters: LogFilter.last60Minutes().generate(),
+    );
+  }
+
+  Future<List<Log>> getByFilter(LogFilter filter) async {
+    return await LogsDatabase.instance.select(
+      filters: filter.generate(),
+    );
   }
 
   write(Log log) {
@@ -37,7 +49,7 @@ class LogsProvider {
     LogsDatabase.instance.delete();
   }
 
-  Future<String> export(File? file) async {
+  Future<String> export([File? file]) async {
     final logs = getAll();
     final output = await LogsExporter.instance.writeLogsToFile(
       file: file ?? config.defaultExportFile,
