@@ -1,4 +1,6 @@
 import 'package:f_logs/utils/utils.dart';
+import 'package:flutter/foundation.dart';
+import 'package:template_string/src/extension.dart';
 
 import '../f_logs.dart';
 
@@ -66,6 +68,21 @@ class Log {
 
   @override
   String toString() {
-    return Formatter.format(this, FLog.config);
+    String output = FLog.config.outputFormat.insertTemplateValues({
+      "time": timestamp!,
+      "level": Utils.fromEnumToString(logLevel),
+      "message": text!,
+      "class": className!,
+      "method": methodName!,
+      "dataLogType": Utils.fromEnumToString(dataLogType) ?? FLog.config.defaultDataLogType,
+      "exception": exception ?? '',
+      "stacktrace": stacktrace ?? '',
+    });
+
+    if (FLog.config.isDevelopmentDebuggingEnabled) {
+      output += !kReleaseMode ? " ${dataLogType} ${timeInMillis}" : "";
+    }
+
+    return "$output\n";
   }
 }

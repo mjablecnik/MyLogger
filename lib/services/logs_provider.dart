@@ -37,7 +37,7 @@ class LogsProvider {
   write(Log log) {
     if (_isLogLevelValid(log.logLevel!)) {
       if (config.isDebuggable) {
-        print(Formatter.format(log, config));
+        print(log);
       }
       LogsDatabase.instance.insert(log);
     }
