@@ -36,7 +36,6 @@ class Log {
     }
   }
 
-  /// Converts class to json
   Map<String, dynamic> toJson() {
     return {
       'className': className,
@@ -51,7 +50,6 @@ class Log {
     };
   }
 
-  /// create `Log` from json
   factory Log.fromJson(Map<String, dynamic> json) {
     return Log(
       className: json['className'],

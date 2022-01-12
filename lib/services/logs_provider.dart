@@ -5,10 +5,8 @@ import 'package:f_logs/f_logs.dart';
 class LogsProvider {
   static LogConfig get config => LogsConfiguration.instance.config;
 
-  // Singleton instance
   static final LogsProvider _singleton = LogsProvider._();
 
-  /// Singleton accessor
   static LogsProvider get instance => _singleton;
 
   LogsProvider._();

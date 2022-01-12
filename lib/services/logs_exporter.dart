@@ -9,11 +9,8 @@ import 'package:f_logs/models/file.dart' as model;
 class LogsExporter {
   static final LogsExporter _singleton = LogsExporter._();
 
-  /// Singleton accessor
   static LogsExporter get instance => _singleton;
 
-  // A private constructor. Allows us to create instances of LogsStorage
-  // only from within the LogsStorage class itself.
   LogsExporter._();
 
   String? _localPath;

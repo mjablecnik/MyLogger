@@ -8,10 +8,8 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
 class LogsDatabase {
-  // Singleton instance
   static final LogsDatabase _singleton = LogsDatabase._();
 
-  /// Singleton accessor
   static LogsDatabase get instance => _singleton;
 
   // Completer is used for transforming synchronous code into asynchronous code.
@@ -19,14 +17,10 @@ class LogsDatabase {
 
   final _flogsStore = intMapStoreFactory.store(DBConstants.FLOG_STORE_NAME);
 
-  /// Key for encryption
   String encryptionKey = "";
 
-  // A private constructor. Allows us to create instances of AppDatabase
-  // only from within the AppDatabase class itself.
   LogsDatabase._();
 
-  /// Database object accessor
   Future<Database> get database async {
     if (_dbOpenCompleter == null) {
       _dbOpenCompleter = Completer();
@@ -42,7 +36,6 @@ class LogsDatabase {
 
     final configuration = FLog.config;
 
-    // Path with the form: /platform-specific-directory/demo.db
     final dbPath = join(directory.path, DBConstants.DB_NAME);
 
     var codec;

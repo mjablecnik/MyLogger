@@ -1,7 +1,6 @@
 import 'package:f_logs/f_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sembast/sembast.dart';
 
 void main() {
   init();
@@ -9,45 +8,11 @@ void main() {
 }
 
 init() {
-  /// Configuration example 1
-//  LogsConfig config = LogsConfig()
-//    ..isDebuggable = true
-//    ..isDevelopmentDebuggingEnabled = true
-//    ..customClosingDivider = "|"
-//    ..customOpeningDivider = "|"
-//    ..csvDelimiter = ", "
-//    ..isLogsEnabled = true
-//    ..encryptionEnabled = false
-//    ..encryptionKey = "123"
-//    ..formatType = FormatType.FORMAT_CURLY
-//    ..logLevelsEnabled = [LogLevel.INFO, LogLevel.ERROR]
-//    ..dataLogTypes = [
-//      DataLogType.DEVICE.toString(),
-//      DataLogType.NETWORK.toString(),
-//      "Zubair"
-//    ]
-//    ..stackTraceFormatter = CustomFormatter.formatStackTrace
-//    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_1;
-
-  /// Configuration example 2
-//  LogsConfig config = FLog.getDefaultConfigurations()
-//    ..isDevelopmentDebuggingEnabled = true
-//    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_2;
-
-  /// Configuration example 3 Format Custom
   LogConfig config = FLog.config
     ..isDevelopmentDebuggingEnabled = false
     ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_3;
 
   FLog.applyConfig(config);
-}
-
-class CustomFormatter {
-  static String formatStackTrace(StackTrace stackTrace) {
-    // You can handle the stackTrace here and return your own custom string as stack trace
-    // As an example, the default stack trace is returned
-    return stackTrace.toString();
-  }
 }
 
 class HomePage extends StatefulWidget {
@@ -56,7 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //runtime permission
   final Permission _permissionGroup = Permission.storage;
 
   @override
@@ -74,7 +38,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _buildTextField(),
               _buildRow1(context),
               _buildRow2(),
               _buildRow3(),
@@ -84,13 +47,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  _buildTextField() {
-    return CircularProgressIndicator();
-//    return TextFormField(
-//      decoration: InputDecoration(hintText: "Enter text"),
-//    );
   }
 
   _buildRow1(BuildContext context) {
@@ -178,16 +134,15 @@ class _HomePageState extends State<HomePage> {
 
   // general methods:-----------------------------------------------------------
   void logInfo() {
-//    FLog.logThis(
-//      className: "HomePage",
-//      methodName: "_buildRow1",
-//      text: "Log text/descritption goes here",
-//      type: LogLevel.INFO,
-//      dataLogType: DataLogType.DEVICE.toString(),
-//    );
+    FLog.log(
+      className: "HomePage",
+      methodName: "_buildRow1",
+      text: "Log text/descritption goes here",
+      type: LogLevel.INFO,
+      dataLogType: DataLogType.DEVICE,
+    );
 
-//    final LogLevel _newLogLevel = null;
-//    FLog.getDefaultConfigurations()..activeLogLevel = _newLogLevel;
+    FLog.config..activeLogLevel = LogLevel.DEBUG;
     FLog.info(text: 'LogLevel set to: ${FLog.config.activeLogLevel}.');
   }
 

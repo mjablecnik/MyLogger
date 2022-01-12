@@ -7,10 +7,8 @@ class LogsConfiguration {
 
   LogConfig _config = LogConfig();
 
-  // Singleton instance
   static final LogsConfiguration _singleton = LogsConfiguration._();
 
-  /// Singleton accessor
   static LogsConfiguration get instance => _singleton;
 
   LogsConfiguration._();

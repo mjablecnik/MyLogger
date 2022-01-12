@@ -9,7 +9,6 @@ export 'package:f_logs/models/config.dart';
 export 'package:f_logs/models/log.dart';
 export 'package:f_logs/models/filter.dart';
 export 'package:f_logs/models/file.dart';
-export 'package:f_logs/utils/date_time.dart';
 export 'package:f_logs/utils/encryption/xxtea.dart';
 export 'package:f_logs/utils/formatter.dart';
 export 'package:f_logs/services/logs_exporter.dart';
