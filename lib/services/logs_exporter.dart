@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:flogs/constants/constants.dart';
+import 'package:flogs/core/constants.dart';
 import 'package:flogs/models/log.dart';
-import 'package:flogs/utils/utils.dart';
+import 'package:flogs/core/utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flogs/models/file.dart' as model;
 

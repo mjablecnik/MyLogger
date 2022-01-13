@@ -4,25 +4,29 @@ class Constants {
   /// Directory
   static const DIRECTORY_NAME = 'FLogs';
 
+  /// Store Name
+  static const STORE_NAME = 'flogs';
+
+  /// DB Name
+  static const DB_NAME = 'flog.db';
+
   /// Encryption key null exception
   static const EXCEPTION_NULL_KEY =
-      // ignore: lines_longer_than_80_chars
+  // ignore: lines_longer_than_80_chars
       'Encryption key is not provided, please provide encryption key in LogsConfig';
+}
 
-  // Print Messages
-  static const PRINT_EXPORT_MSG =
-      // ignore: lines_longer_than_80_chars
-      '\n--------------------------------------------------------------------------------------------\nExporting Logs: This might take a while depending upon the size\n--------------------------------------------------------------------------------------------';
-
-  /// Print Log Messages
-  static const PRINT_LOG_MSG =
-      // ignore: lines_longer_than_80_chars
-      '\n--------------------------------------------------------------------------------------------\nPrinting Logs: This might take a while depending upon the size\n---------------------------------------------------------------------------------------------';
-
-  /// Print Data Logs Messages
-  static const PRINT_DATA_LOG_MSG =
-      // ignore: lines_longer_than_80_chars
-      '\n--------------------------------------------------------------------------------------------\nPrinting Data Logs: This might take a while depending upon the size\n----------------------------------------------------------------------------------------';
+class LogFields {
+  static const id = 'id';
+  static const className = 'className';
+  static const methodName = 'methodName';
+  static const text = 'text';
+  static const timestamp = 'timestamp';
+  static const exception = 'exception';
+  static const dataLogType = 'dataLogType';
+  static const timeInMillis = 'timeInMillis';
+  static const logLevel = 'logLevel';
+  static const stacktrace = 'stacktrace';
 }
 
 class TimestampFormat {
@@ -51,3 +55,5 @@ enum FilterType { LAST_HOUR, LAST_24_HOURS, TODAY, WEEK, ALL }
 enum DataLogType { DEFAULT, DEVICE, LOCATION, NOTIFICATION, NETWORK, DATABASE, ERRORS }
 
 enum FileType { TXT, ZIP }
+
+enum EncryptionType { NONE, XXTEA, AES_GCM }

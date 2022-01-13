@@ -1,4 +1,4 @@
-import 'package:flogs/constants/db_constants.dart';
+import 'package:flogs/core/constants.dart';
 import 'package:sembast/sembast.dart';
 
 class LogFilter {
@@ -89,15 +89,15 @@ class LogFilter {
   }) {
     var filters = <Filter>[];
 
-    if (dataLogsType.isNotEmpty) filters.add(Filter.inList(DBConstants.FIELD_DATA_LOG_TYPE, dataLogsType));
+    if (dataLogsType.isNotEmpty) filters.add(Filter.inList(LogFields.dataLogType, dataLogsType));
 
-    if (logLevels.isNotEmpty) filters.add(Filter.inList(DBConstants.FIELD_LOG_LEVEL, logLevels));
+    if (logLevels.isNotEmpty) filters.add(Filter.inList(LogFields.logLevel, logLevels));
 
     if (startDateTime != null)
-      filters.add(Filter.greaterThan(DBConstants.FIELD_TIME_IN_MILLIS, startDateTime.millisecondsSinceEpoch));
+      filters.add(Filter.greaterThan(LogFields.timeInMillis, startDateTime.millisecondsSinceEpoch));
 
     if (endDateTime != null)
-      filters.add(Filter.lessThan(DBConstants.FIELD_TIME_IN_MILLIS, endDateTime.millisecondsSinceEpoch));
+      filters.add(Filter.lessThan(LogFields.timeInMillis, endDateTime.millisecondsSinceEpoch));
 
     return filters;
   }

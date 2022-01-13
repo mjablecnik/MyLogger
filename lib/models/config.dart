@@ -41,7 +41,7 @@ class LogConfig {
   String outputFormat = OutputLogFormat.FULL;
 
   /// Encryption enabled
-  String encryption = "";
+  EncryptionType encryption = EncryptionType.NONE;
 
   /// Encryption Key
   String encryptionKey = "";

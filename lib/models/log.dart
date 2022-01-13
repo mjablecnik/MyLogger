@@ -1,4 +1,4 @@
-import 'package:flogs/utils/utils.dart';
+import 'package:flogs/core/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:template_string/src/extension.dart';
 

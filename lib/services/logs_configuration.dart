@@ -16,7 +16,7 @@ class LogsConfiguration {
   LogConfig get config => _config;
 
   applyConfig(LogConfig config) {
-    if (_config.encryption.isNotEmpty && _config.encryptionKey.isEmpty) {
+    if (_config.encryption != EncryptionType.NONE && _config.encryptionKey.isEmpty) {
       throw Exception(Constants.EXCEPTION_NULL_KEY);
     }
     _config = config;

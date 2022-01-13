@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flogs/flogs.dart';
-import 'package:flogs/utils/encryption/gcm.dart';
+import 'package:flogs/core/encryption/gcm.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
@@ -15,7 +15,7 @@ class LogsDatabase {
   // Completer is used for transforming synchronous code into asynchronous code.
   Completer<Database>? _dbOpenCompleter;
 
-  final _flogsStore = intMapStoreFactory.store(DBConstants.FLOG_STORE_NAME);
+  final _flogsStore = intMapStoreFactory.store(Constants.STORE_NAME);
 
   String encryptionKey = "";
 
@@ -36,18 +36,21 @@ class LogsDatabase {
 
     final configuration = FLog.config;
 
-    final dbPath = join(directory.path, DBConstants.DB_NAME);
+    final dbPath = join(directory.path, Constants.DB_NAME);
 
     var codec;
 
-    if (configuration.encryption.isNotEmpty && configuration.encryptionKey.isNotEmpty) {
-      // Initialize the encryption codec with a user password
-      if (configuration.encryption == 'xxtea') {
-        codec = getXXTeaSembastCodec(password: configuration.encryptionKey);
-      } else if (configuration.encryption == 'aes-gcm') {
-        codec = getGCMSembastCodec(password: configuration.encryptionKey);
-      } else {
-        throw 'Unsupported encryption';
+    // Initialize the encryption codec with a user password
+    if (configuration.encryptionKey.isNotEmpty) {
+      switch (configuration.encryption) {
+        case EncryptionType.XXTEA:
+          codec = getXXTeaSembastCodec(password: configuration.encryptionKey);
+          break;
+        case EncryptionType.AES_GCM:
+          codec = getGCMSembastCodec(password: configuration.encryptionKey);
+          break;
+        case EncryptionType.NONE:
+          break;
       }
     }
 
@@ -59,7 +62,7 @@ class LogsDatabase {
   Future<List<Log>> select({List<Filter>? filters}) async {
     Finder? finder;
     if (filters != null) {
-      finder = Finder(filter: Filter.and(filters), sortOrders: [SortOrder(DBConstants.FIELD_TIME_IN_MILLIS)]);
+      finder = Finder(filter: Filter.and(filters), sortOrders: [SortOrder(LogFields.timeInMillis)]);
     }
 
     final recordSnapshots = await (_flogsStore.find(

@@ -1,6 +1,6 @@
 import 'package:flogs/flogs.dart';
 import 'package:flogs/services/logs_configuration.dart';
-import 'package:flogs/utils/utils.dart';
+import 'package:flogs/core/utils.dart';
 import 'package:stack_trace/stack_trace.dart';
 
 class FLog {
