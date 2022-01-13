@@ -56,8 +56,11 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _buildRow1(context),
+            SizedBox(height: 8),
             _buildRow2(),
+            SizedBox(height: 8),
             _buildRow3(),
+            SizedBox(height: 8),
             _buildRow4(),
           ],
         ),
@@ -129,9 +132,9 @@ class _HomePageState extends State<HomePage> {
           );
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
-        _buildButton("Delete Logs by Filter (older then 10 minutes)", () {
+        _buildButton("Delete Logs older then 10 minutes", () {
           final dateTime = DateTime.now().subtract(Duration(minutes: 10));
-          final filter = LogFilter(startDateTime: dateTime);
+          final filter = LogFilter(endDateTime: dateTime);
           FLog.logs.deleteByFilter(filter).then((_) => print("Deleted"));
         }),
       ],
@@ -140,11 +143,12 @@ class _HomePageState extends State<HomePage> {
 
   _buildButton(String title, VoidCallback onPressed) {
     return Expanded(
-      child: MaterialButton(
-        onPressed: onPressed,
-        child: Text(title),
-        textColor: Colors.white,
-        color: Colors.blueAccent,
+      child: SizedBox(
+        height: 60,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          child: Text(title),
+        ),
       ),
     );
   }
