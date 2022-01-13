@@ -59,18 +59,12 @@ class LogsProvider {
     );
   }
 
-  Future<String> export([File? file]) async {
-    final logs = getAll();
+  Future<String> export({File? fileName, LogFilter? filter}) async {
+    final logs = filter == null ? getAll() : getByFilter(filter);
     final output = await LogsExporter.instance.writeLogsToFile(
-      file: file ?? config.defaultExportFile,
+      file: fileName ?? config.defaultExportFile,
       logs: await logs,
     );
     return output.path;
-  }
-
-  sendToServer({required Uri serverAddress}) async {
-    final file = await export(config.defaultExportFile);
-    // TODO: Send exported logs into remote server
-    // TODO: Delete ZIP file after send
   }
 }
