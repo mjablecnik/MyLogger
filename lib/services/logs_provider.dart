@@ -1,3 +1,4 @@
+import 'dart:io' as io;
 import 'dart:async';
 
 import 'package:flogs/flogs.dart';
@@ -59,12 +60,15 @@ class LogsProvider {
     );
   }
 
-  Future<String> export({File? fileName, LogFilter? filter}) async {
+  Future<io.File> export({String? fileName, LogFilter? filter, FileType? exportType}) async {
     final logs = filter == null ? getAll() : getByFilter(filter);
     final output = await LogsExporter.instance.writeLogsToFile(
-      file: fileName ?? config.defaultExportFile,
       logs: await logs,
+      file: File(
+        name: fileName ?? config.defaultExportFile.name,
+        type: exportType ?? config.defaultExportFile.type,
+      ),
     );
-    return output.path;
+    return output;
   }
 }

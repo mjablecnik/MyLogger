@@ -3,11 +3,11 @@ import 'package:flogs/core/constants.dart';
 class File {
   final String name;
   final String? path;
-  final FileType type;
+  final FileType? type;
 
   const File({
     required this.name,
-    required this.type,
+    this.type,
     this.path,
   });
 }
