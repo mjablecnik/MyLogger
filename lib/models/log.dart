@@ -40,29 +40,29 @@ class Log {
 
   Map<String, dynamic> toJson() {
     return {
-      'className': className,
-      'methodName': methodName,
-      'text': text,
-      'timestamp': timestamp,
-      'timeInMillis': timeInMillis,
-      'exception': exception,
-      'dataLogType': Utils.fromEnumToString(dataLogType),
-      'logLevel': Utils.fromEnumToString(logLevel),
-      'stacktrace': stacktrace,
+      LogFields.className: className,
+      LogFields.methodName: methodName,
+      LogFields.text: text,
+      LogFields.timestamp: timestamp,
+      LogFields.timeInMillis: timeInMillis,
+      LogFields.exception: exception,
+      LogFields.dataLogType: Utils.fromEnumToString(dataLogType),
+      LogFields.logLevel: Utils.fromEnumToString(logLevel),
+      LogFields.stacktrace: stacktrace,
     };
   }
 
   factory Log.fromJson(Map<String, dynamic> json) {
     return Log(
-      className: json['className'],
-      methodName: json['methodName'],
-      text: json['text'],
-      timestamp: json['timestamp'],
-      timeInMillis: json['timeInMillis'],
-      exception: json['exception'],
-      dataLogType: Utils.toEnum(FLog.config.dataLogTypeValues, json['dataLogType']),
-      logLevel: Utils.toEnum(LogLevel.values, json['logLevel']),
-      stacktrace: json['stacktrace'],
+      className: json[LogFields.className],
+      methodName: json[LogFields.methodName],
+      text: json[LogFields.text],
+      timestamp: json[LogFields.timestamp],
+      timeInMillis: json[LogFields.timeInMillis],
+      exception: json[LogFields.exception],
+      dataLogType: Utils.toEnum(FLog.config.dataLogTypeValues, json[LogFields.dataLogType]),
+      logLevel: Utils.toEnum(LogLevel.values, json[LogFields.logLevel]),
+      stacktrace: json[LogFields.stacktrace],
     );
   }
 
