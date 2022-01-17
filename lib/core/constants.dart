@@ -48,7 +48,7 @@ class OutputLogFormat {
   static const FULL = "{{time}} {{level}} [{{class}}:{{method}}] DataLogType.{{dataLogType}} -> {{message}} {{exception}} {{stacktrace}}";
 }
 
-enum LogLevel { ALL, TRACE, DEBUG, INFO, WARNING, ERROR, SEVERE, FATAL, OFF }
+enum LogLevel { ALL, DEBUG, TRACE, INFO, WARNING, ERROR, SEVERE, FATAL, OFF }
 
 enum FilterType { LAST_HOUR, LAST_24_HOURS, TODAY, WEEK, ALL }
 
