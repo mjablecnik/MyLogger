@@ -46,7 +46,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flogs: ^1.0.0
+  flogs: ^3.0.0
 ```
 
 **2. Install it**
