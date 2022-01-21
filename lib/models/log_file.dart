@@ -1,11 +1,11 @@
 import 'package:flogs/core/constants.dart';
 
-class File {
+class LogFile {
   final String name;
   final String? path;
   final FileType? type;
 
-  const File({
+  const LogFile({
     required this.name,
     this.type,
     this.path,

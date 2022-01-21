@@ -64,7 +64,7 @@ class LogsProvider {
     final logs = filter == null ? getAll() : getByFilter(filter);
     final output = await LogsExporter.instance.writeLogsToFile(
       logs: await logs,
-      file: File(
+      file: LogFile(
         name: fileName ?? config.defaultExportFile.name,
         type: exportType ?? config.defaultExportFile.type,
       ),

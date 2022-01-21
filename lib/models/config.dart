@@ -1,4 +1,4 @@
-import 'package:flogs/models/file.dart';
+import 'package:flogs/models/log_file.dart';
 import 'package:flogs/flogs.dart';
 
 typedef String? StackTraceFormatter(StackTrace stackTrace);
@@ -52,5 +52,5 @@ class LogConfig {
   // Configure a custom formatter for the StackTrace
   StackTraceFormatter? stackTraceFormatter;
 
-  File defaultExportFile = File(name: "LogExport", type: FileType.TXT);
+  LogFile defaultExportFile = LogFile(name: "LogExport", type: FileType.TXT);
 }

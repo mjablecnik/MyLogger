@@ -7,7 +7,7 @@ export 'package:flogs/models/flog.dart';
 export 'package:flogs/models/config.dart';
 export 'package:flogs/models/log.dart';
 export 'package:flogs/models/filter.dart';
-export 'package:flogs/models/file.dart';
+export 'package:flogs/models/log_file.dart';
 export 'package:flogs/core/encryption/xxtea.dart';
 export 'package:flogs/services/logs_exporter.dart';
 export 'package:flogs/logs_widget.dart';

@@ -4,7 +4,7 @@ import 'package:flogs/core/constants.dart';
 import 'package:flogs/models/log.dart';
 import 'package:flogs/core/utils.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flogs/models/file.dart' as model;
+import 'package:flogs/models/log_file.dart' as model;
 
 class LogsExporter {
   static final LogsExporter _singleton = LogsExporter._();
@@ -29,14 +29,14 @@ class LogsExporter {
     return _localPath!;
   }
 
-  Future<File> prepareFile(model.File file) async {
+  Future<File> prepareFile(model.LogFile file) async {
     final path = file.path ?? await getDefaultPath();
     await Directory(path).create();
     final fileType = Utils.fromEnumToString(file.type).toLowerCase();
     return File("$path/${file.name}.$fileType");
   }
 
-  Future<File> writeLogsToFile({required List<Log> logs, required model.File file}) async {
+  Future<File> writeLogsToFile({required List<Log> logs, required model.LogFile file}) async {
     final outputFile = await prepareFile(file);
 
     String logLines = "";
