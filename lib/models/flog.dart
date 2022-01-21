@@ -26,10 +26,10 @@ class FLog {
     }
   }
 
-  static void trace({
+  static void trace(
+    String text, {
     String? className,
     String? methodName,
-    required String text,
     dynamic exception,
     Enum? dataLogType,
     StackTrace? stacktrace,
@@ -37,10 +37,10 @@ class FLog {
     _log(className, methodName, text, LogLevel.TRACE, exception, dataLogType, stacktrace);
   }
 
-  static void debug({
+  static void debug(
+    String text, {
     String? className,
     String? methodName,
-    required String text,
     dynamic exception,
     Enum? dataLogType,
     StackTrace? stacktrace,
@@ -48,10 +48,10 @@ class FLog {
     _log(className, methodName, text, LogLevel.DEBUG, exception, dataLogType, stacktrace);
   }
 
-  static void info({
+  static void info(
+    String text, {
     String? className,
     String? methodName,
-    required String text,
     dynamic exception,
     Enum? dataLogType,
     StackTrace? stacktrace,
@@ -59,10 +59,10 @@ class FLog {
     _log(className, methodName, text, LogLevel.INFO, exception, dataLogType, stacktrace);
   }
 
-  static void warning({
+  static void warning(
+    String text, {
     String? className,
     String? methodName,
-    required String text,
     dynamic exception,
     Enum? dataLogType,
     StackTrace? stacktrace,
@@ -70,10 +70,10 @@ class FLog {
     _log(className, methodName, text, LogLevel.WARNING, exception, dataLogType, stacktrace);
   }
 
-  static void error({
+  static void error(
+    String text, {
     String? className,
     String? methodName,
-    required String text,
     dynamic exception,
     Enum? dataLogType,
     StackTrace? stacktrace,
@@ -81,10 +81,10 @@ class FLog {
     _log(className, methodName, text, LogLevel.ERROR, exception, dataLogType, stacktrace);
   }
 
-  static void severe({
+  static void severe(
+    String text, {
     String? className,
     String? methodName,
-    required String text,
     dynamic exception,
     Enum? dataLogType,
     StackTrace? stacktrace,
@@ -92,10 +92,10 @@ class FLog {
     _log(className, methodName, text, LogLevel.SEVERE, exception, dataLogType, stacktrace);
   }
 
-  static void fatal({
+  static void fatal(
+    String text, {
     String? className,
     String? methodName,
-    required String text,
     dynamic exception,
     Enum? dataLogType,
     StackTrace? stacktrace,
@@ -158,5 +158,4 @@ class FLog {
 
     LogsProvider.instance.write(log);
   }
-
 }

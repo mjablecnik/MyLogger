@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
       children: <Widget>[
         _buildButton("Log Event with StackTrace", () {
           FLog.error(
-            text: "My log",
+            "My log",
             dataLogType: DataLogType.DEVICE,
             className: "Home",
             exception: Exception("Exception and StackTrace"),
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     FLog.config..activeLogLevel = LogLevel.DEBUG;
-    FLog.info(text: 'LogLevel set to: ${FLog.config.activeLogLevel}.');
+    FLog.info('LogLevel set to: ${FLog.config.activeLogLevel}.');
   }
 
   void logException() {
@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
       print(result);
     } on Exception catch (exception) {
       FLog.error(
-        text: "Exception text/descritption goes here",
+        "Exception text/descritption goes here",
         dataLogType: DataLogType.ERRORS,
         className: "Home",
         exception: exception,
@@ -183,18 +183,18 @@ class _HomePageState extends State<HomePage> {
 
   void logWarning() {
     FLog.warning(
+      "Log text/descritption goes here",
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "Log text/descritption goes here",
       dataLogType: DataLogType.DEFAULT,
     );
   }
 
   void logTrace() {
     FLog.trace(
+      "Log text/descritption goes here",
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "Log text/descritption goes here",
       dataLogType: DataLogType.DEFAULT,
     );
   }
