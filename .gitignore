@@ -11,9 +11,7 @@ ios/.generated/
 ios/Flutter/Generated.xcconfig
 ios/Runner/GeneratedPluginRegistrant.*
 example/ios/Flutter/flutter_export_environment.sh
-example/pubspec.lock
 example/.flutter-plugins-dependencies
-pubspec.lock
 
 # FVM during tests
 .fvm
