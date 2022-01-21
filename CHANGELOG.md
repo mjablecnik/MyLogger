@@ -1,79 +1,44 @@
-## [2.0.0-alpha-01] - Mar 31, 2021
+# Changelog
+All notable changes to this project will be documented in this file.
 
-* upgraded sembast
-* upgraded path provider
-* upgraded intl
-* upgraded to flutter 2.0
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.3.0-alpha-02] - May 25, 2020
 
-* changed exception to dynamic in-order to handle both exception & error
-* added support for file export
-* refactored code
+## [Unreleased]
 
-## [1.3.0-alpha-01] - Mar 23, 2020
 
-* refactored main.dart
-* changed exception to dynamic in-order to handle both exception & error
 
-## [1.2.2] - Oct 15, 2019
+## [1.0.0] - 2022-01-21
+### Added
+- AES GCM encryption
+- Fix invalid type cast
+- Simpler log format
+- String template for log output
+- OutputLogFormat class for predefined log formats
+- LogExporter class
+- LogWidget for display all saved logs
 
-* Upgraded all the dependencies
-* upgraded example to support AndroidX
+### Changed
+- Upgrade AndroidManifest.xml
+- Upgrade dependencies
+- Refactor DateTimeUtils
+- Refactor LogStorage
+- Refactor Constants and Enums
+- Refactor project structure
+- Refactor FlogDao class
+- Refactor and cleanup FLog class
+- Rewrite log filters
+- DataLogType from String to Enum
+- Rewrite functionality for export logs into text file
+- Improve example project
+- Replace Strings by Enums or Constants  
 
-## [1.2.1] - Oct 15, 2019
+### Fixed
+- Fix timestamp formats
 
-* Import only one file instead of all the package files
-* Added fieldOrderFormatCustom for order fields in customized output
-* Added logging of stack traces
-* Added Log Level functionality, skipping lower Log Levels
-* Added deleteAllLogsByFilter
+### Removed
+- Unused Constants and Enums
+- Formatter class
 
-## [1.2.0] - Jul 20, 2019
 
-* Fixed logs delete issue
-* Upgraded to v2.0
-
-## [1.1.2] - May 05, 2019
-
-* Updated readme.md file
-* Fixed LogLevel issue
-
-## [1.1.1] - May 05, 2019
-
-* Bugfix in print logs function
-
-## [1.1.0] - May 05, 2019
-
-* Added convenience methods for log levels
-* Added default configuration
-* Changed className and methodName to optional
-* Updated readme.me
-
-## [1.0.1] - May 04, 2019
-
-* Removed unused code
-
-## [1.0.0] - May 04, 2019
-
-* Updated readme.md file
-* Added filter types
-
-## [0.1.5] - May 03, 2019
-
-* Updated readme.md file
-* Added encryption support
-
-## [0.0.4] - May 03, 2019
-
-* Updated readme.md file
-* Added wiki
-
-## [0.0.3] - May 02, 2019
-
-* Updated readme.md file
-* Added wiki
-
-## [0.0.2] - May 02, 2019
-
-* Done code formatting

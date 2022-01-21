@@ -2,35 +2,41 @@
 
 # FLogs Advance Logging Framework
 
-FLog is an Advanced Logging Framework develop in flutter that provides quick & simple logging solution. All logs are saved to the DB which can then be exported as a zip file.
+FLog is an Advanced Logging Framework develop in flutter that provides quick & simple logging solution. 
+All logs are saved into DB which can be exported as a text file.
 
 Overview
 --------
 
-FLogs is written in dart. It basically features two types of loggers (FLog & DataLog) with many of advanced features needed for logging. Logs are saved in database which can then be exported in document directory of Android|iOS device. The logs are helpful when developer wants to analyze user activities within the app. These logs can be filtered and sorted easily. Logs can easily be exported as zip file base on filter type, the zip file can then be uploaded to server or to use it locally. 
+FLogs is written in Dart.<br> 
+Logs are saved into Sembast database which can be exported into document directory and uploaded into server. 
 
-Many times we want to log set of data to analyze certain activity e.g. Location (GPS Coordinates), Device info, Network requests etc. this helps us to quickly identify and fix the issue that is hard to debug when the app is in production. FLogs provide such functionality to log data set into database. These logs can then be fetched by applying different convinience filters availale.
+Logs are helpful when developer wants to analyze user activities within the app. 
+Many times we want to log a set of data to analyze certain activity. 
+For example: 
+- Location (GPS Coordinates), 
+- Device info, 
+- Network requests 
+- etc.. 
+
+This helps us to quickly identify and fix issues that are hard to debug when app is in the production. <br>
+FLogs provide functionality for log these data sets into database and fetch it by different filters.
+
 
 Features
 --------
 
-1. Logs events in files created separately every hour with **'FLogs'** logger. (24 hours)
-2. Files can be compressed and exported for time and day filters
-3. Clear Logs easily
-4. Save logs to custom path (Supported in Android only)
-5. Export Logs to custom path as zip file (Supported in Android only)
-6. Custom Log formatting
-7. CSV support
-8. Custom timestamps support
-9. Custom data logging support with **'DataLogs'** logger.
-10. Encryption support added
-11. Multiple directory structures
-12. Print logs as String
-13. Export all or single types of logs
-14. Advanced Automation for deleting logs automatically
-15. Exports HTML formatted exceptions
-16. Log level support
+1. Log messages by various levels (DEBUG, TRACE, INFO, WARNING, ERROR, SEVERE, FATAL) 
+2. Save logs into database                                                            
+3. Export logs into file                                                              
+4. Fetch or delete logs easily                                                        
+5. Log filtering support                                                              
+6. Custom timestamps support                                                          
+7. Custom data type logging support                                                   
+8. Custom log format support                                                          
+9. Encryption support                                                                 
                 
+
 Use this package as a library
 -----------------------------
 
@@ -38,9 +44,9 @@ Use this package as a library
 
 Add this to your package's pubspec.yaml file:
 
-```
+```yaml
 dependencies:
-  f_logs: ^1.0.x
+  flogs: ^1.0.0
 ```
 
 **2. Install it**
@@ -49,7 +55,7 @@ You can install packages from the command line:
 
 with Flutter
 
-```
+```bash
 $ flutter packages get
 ```
 
@@ -59,8 +65,8 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 Now in your Dart code, you can use:
 
-```
-import 'package:f_logs/f_logs.dart';
+```dart
+import 'package:flogs/flogs.dart';
 ```
 
 How to use
@@ -83,298 +89,111 @@ Log files are exported on storage directory so it's very important to add these 
 
 To save logs, simply call any of the method mentioned below:
 
-**1. Simple Trace Log**
 
 ```dart 
-    FLog.trace(
+    FLog.trace("My trace log"); 
+
+    FLog.debug("My debug log");
+
+    FLog.info("My info log");
+
+    FLog.warning("My warning log");
+
+    FLog.error("My error log");
+
+    FLog.severe("My severe log");
+
+    FLog.fatal("My fatal log");
+
+    FLog.log(
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "My log");
-```
-
-**2. Simple Debug Log**
-
-```dart 
-    FLog.debug(
-      className: "HomePage",
-      methodName: "_buildRow1",
-      text: "My log");
-```
-
-**3. Simple Info Log**
-
-```dart 
-    FLog.info(
-      className: "HomePage",
-      methodName: "_buildRow1",
-      text: "My log");
-```
-
-**4. Simple Warning Log**
-
-```dart 
-    FLog.warning(
-      className: "HomePage",
-      methodName: "_buildRow1",
-      text: "My log";
-```
-
-**5. Simple Error Log**
-
-```dart 
-    FLog.error(
-      className: "HomePage",
-      methodName: "_buildRow1",
-      text: "My log");
-```
-
-**6. Simple Severe Log**
-
-```dart 
-    FLog.severe(
-      className: "HomePage",
-      methodName: "_buildRow1",
-      text: "My log");
-```
-
-**7. Severe Log with Exception and StackTrace**
-
-```dart 
-    FLog.logThis(
-      className: "HomePage",
-      methodName: "_buildRow1",
-      text: "My log",
+      text: "My severe log with exception and stacktrace",
       type: LogLevel.SEVERE, 
       exception: Exception("This is an Exception!"),
-      stacktrace: StackTrace.current);
-```
+      stacktrace: StackTrace.current,
+    );
 
-**8. Simple Fatal Log**
-
-```dart 
-    FLog.fatal(
+    FLog.log(
       className: "HomePage",
       methodName: "_buildRow1",
-      text: "My log");
-```
-
-**9. Data Type Log**
-
-```dart 
-    FLog.logThis(
-      className: "HomePage",
-      methodName: "_buildRow1",
-      text: "My log",
+      text: "My severe log with dataLogType",
       type: LogLevel.SEVERE,
-      dataLogType: DataLogType.DEVICE.toString());
+      dataLogType: DataLogType.DEVICE,
+    );
 ```
+
 
 Available Methods
 -----------------
-FLogs provide many convenience methods to save logs into or to fetch them from database, below is the list of all the methods available:
+FLogs provide many other methods for save, filter or fetch logs. Below is list of all this methods:
 
-**1. logThis**
 
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. The difference between FLog and DataLogs is described above, you can also check out wiki for more details. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+**Get logs:**
 
 ```dart 
-static logThis({
-    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
-    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
-    @required String text,
-    @required LogLevel type,
-    Exception exception,
-    String dataLogType,
-    StackTrace stacktrace,
-}){}
+Flogs.logs.getAll();   // Get all saved logs
+Flogs.logs.getLastHour();   // Get all saved logs for last hour
+
+// Get logs by LogFilter:
+FLog.logs.getByFilter(
+  LogFilter(
+    startDateTime: DateTime(2019), 
+    endDateTime: DateTime(2020), 
+    dataLogsType: [DataLogType.NETWORK],
+    logLevels: [LogLevel.ERROR, LogLevel.WARNING],
+  ),  
+);
+
+// LogFilters also have some named constructors:
+FLog.logs.getByFilter(LogFilter.last24Hours());
 ```
 
-**2. trace**
-
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+**Write logs:**
 
 ```dart 
-static trace({
-    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
-    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
-    @required String text,
-    Exception exception,
-    String dataLogType,
-    StackTrace stacktrace,
-}){}
+FLog.logs.write(Log log);  // Save your own Log object
 ```
 
-**3. debug**
-
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+**Delete logs:**
 
 ```dart 
-static debug({
-    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
-    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
-    @required String text,
-    Exception exception,
-    String dataLogType,
-    StackTrace stacktrace,
-}){}
-```
+Flogs.logs.deleteAll();   // Delete all saved logs
+Flogs.logs.deleteLastHour();   // Delete all saved logs for last hour
 
-**4. info**
-
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
-
-```dart 
-static info({
-    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
-    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
-    @required String text,
-    Exception exception,
-    String dataLogType,
-    StackTrace stacktrace,
-}){}
-```
-
-**5. warning**
-
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
-
-```dart 
-static warning({
-    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
-    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
-    @required String text,
-    Exception exception,
-    String dataLogType,
-    StackTrace stacktrace,
-}){}
+// Delete logs by LogFilter:
+FLog.logs.deleteByFilter(
+  LogFilter(
+    startDateTime: DateTime(2019), 
+    endDateTime: DateTime(2020), 
+    dataLogsType: [DataLogType.NETWORK],
+    logLevels: [LogLevel.ERROR, LogLevel.WARNING],
+  ),  
+);
 
 ```
 
-**6. error**
-
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+**Export logs:**
 
 ```dart 
-static error({
-    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
-    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
-    @required String text,
-    Exception exception,
-    String dataLogType,
-    StackTrace stacktrace,
-}){}
-
+File fileExport = await FLog.logs.export(
+  fileName: "export-all-logs",
+  exportType: FileType.TXT,
+  filter: LogFilter.last24Hours(),
+);
 ```
 
-**7. severe**
 
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
+**Change configuration:**
 
 ```dart 
-static severe({
-    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
-    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
-    @required String text,
-    Exception exception,
-    String dataLogType,
-    StackTrace stacktrace,
-}){}
+    LogConfig config = FLog.config
+      ..outputFormat = "{{level}} {{time}} - {{message}}"
+      ..dataLogTypeValues = DataLogType.values
+      ..encryption = EncryptionType.XXTEA
+      ..encryptionKey = encryptionKey
+      ..timestampFormat = TimestampFormat.DEFAULT;
 
+    FLog.applyConfig(config);
 ```
-
-**8. fatal**
-
-Logs string data along with className, methodName, logText and the type of log (LogLevel.SEVERE, LogLevel.INFO) etc. The same method can be used to log exception(s) or data logs. If either className or methodName is not provided, it will automatically be taken by getting calling class and method.
-
-```dart 
-static fatal({
-    String className, // This is optional if not provided, then it will automatically be taken by getting calling class
-    String methodName, // This is optional if not provided, then it will automatically be taken by getting calling method
-    @required String text,
-    Exception exception,
-    String dataLogType,
-    StackTrace stacktrace,
-}){}
-
-```
-
-**9. printLogs**
-
-Fetches all the logs from database and prints them as a string using StringBuffer()
-
-```dart 
-static printLogs() async {}
-```
-
-**10. getAllLogsByCustomFilter**
-
-Accepts list of filters as an arguments and returns list of logs based on the provided filters. The use of Filters with their usage is explained in wiki, please checkout wiki for more details.
-
-```dart 
-List<Filter> filters = [Filter.greaterThan('[FieldName]', '[Value]')]
-
-static Future<List<Log>> getAllLogsByCustomFilter(
-    {List<Filter> filters}) async {}
-```
-
-**11. getAllLogsByFilter**
-
-A convenience method that filters data based on the provided filter params e.g. dataLogsType (DataLogType.DEVICE,  DataLogType.NETWORK), logLevels(LogLevel.SEVERE, LogLevel.INFO), startTimeInMillis (millisec of the day you from where you want logs to be fetched), endTimeInMillis (milisec of the day you till you want logs to be fetched) and filterType (FilterType.LAST_HOUR, FilterType.LAST_24_HOURS, FilterType.TODAY, FilterType.WEEK, FilterType.ALL). Filter type can't be used with `startTimeInMillis`, `endTimeInMillis`, if so the priority will be given to `startTimeInMillis`, `endTimeInMillis`. In-order to have full control over filters, use method provided above.
-
-```dart 
-static Future<List<Log>> getAllLogsByFilter(
-    {List<String> dataLogsType,
-    List<String> logLevels,
-    int startTimeInMillis,
-    int endTimeInMillis,
-    FilterType filterType}}) async {}
-```
-
-**12. getAllLogs**
-
-Fetches all the logs from database and returns a list of logs.
-
-```dart 
-static Future<List<Log>> getAllLogs() async {}
-```
-
-**13. exportLogs**
-
-Exports logs to external storage under FLog directory.
-
-```dart 
-static exportLogs() async {}
-```
-
-**14. clearLogs**
-
-Clears all the logs stored in database.
-
-```dart 
-static clearLogs() {}
-```
-
-**15. applyConfigurations**
-
-Apply user provided configurations to FLogs.
-
-```dart 
-static applyConfigurations(LogsConfig config) {}
-```
-
-**16. deleteAllLogsByFilter**
-
-Accepts list of filters as an arguments and delete logs based on the provided filters. The use of Filters with their usage is explained in wiki, please checkout wiki for more details.
-
-```dart 
-List<Filter> filters = [Filter.greaterThan('[FieldName]', '[Value]')]
-
-static deleteAllLogsByFilter(
-    {List<Filter> filters}) async {}
-```
-
-Wiki
-----
-
-Checkout [wiki](https://github.com/zubairehman/Flogs/wiki) for more info
 
