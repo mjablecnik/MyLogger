@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flogs/flogs.dart';
-import 'package:flogs/core/encryption/gcm.dart';
+import 'package:my_logger/my_logger.dart';
+import 'package:my_logger/core/encryption/gcm.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
@@ -15,7 +15,7 @@ class LogsDatabase {
   // Completer is used for transforming synchronous code into asynchronous code.
   Completer<Database>? _dbOpenCompleter;
 
-  final _flogsStore = intMapStoreFactory.store(Constants.STORE_NAME);
+  final _dbStore = intMapStoreFactory.store(Constants.STORE_NAME);
 
   String encryptionKey = "";
 
@@ -34,7 +34,7 @@ class LogsDatabase {
     // Get a platform-specific directory where persistent app data can be stored
     final directory = await getApplicationSupportDirectory();
 
-    final configuration = FLog.config;
+    final configuration = MyLogger.config;
 
     final dbPath = join(directory.path, Constants.DB_NAME);
 
@@ -65,7 +65,7 @@ class LogsDatabase {
       finder = Finder(filter: Filter.and(filters), sortOrders: [SortOrder(LogFields.timeInMillis)]);
     }
 
-    final recordSnapshots = await (_flogsStore.find(
+    final recordSnapshots = await (_dbStore.find(
       await database,
       finder: finder,
     ));
@@ -78,7 +78,7 @@ class LogsDatabase {
   }
 
   Future<int> insert(Log log) async {
-    return await _flogsStore.add(await database, log.toJson());
+    return await _dbStore.add(await database, log.toJson());
   }
 
   Future<int> delete({List<Filter>? filters}) async {
@@ -89,7 +89,7 @@ class LogsDatabase {
       );
     }
 
-    var deleted = await _flogsStore.delete(
+    var deleted = await _dbStore.delete(
       await database,
       finder: finder,
     );

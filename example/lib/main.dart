@@ -1,4 +1,4 @@
-import 'package:flogs/flogs.dart';
+import 'package:my_logger/my_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -8,11 +8,11 @@ void main() {
 }
 
 _init() {
-  var config = FLog.config;
+  var config = MyLogger.config;
   config.isDevelopmentDebuggingEnabled = false;
   config.timestampFormat = TimestampFormat.TIME_FORMAT_FULL_3;
 
-  FLog.applyConfig(config);
+  MyLogger.applyConfig(config);
 }
 
 class HomePage extends StatefulWidget {
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Print all Logs", () async {
           print("\nPrinting all logs:");
-          FLog.logs.getAll().then((logs) => logs.forEach(print));
+          MyLogger.logs.getAll().then((logs) => logs.forEach(print));
         }),
       ],
     );
@@ -90,12 +90,12 @@ class _HomePageState extends State<HomePage> {
     return Row(
       children: <Widget>[
         _buildButton("Export Logs", () async {
-          final exportedFile = await FLog.logs.export();
+          final exportedFile = await MyLogger.logs.export();
           print("Logs are exported into: $exportedFile");
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Clear Logs", () {
-          FLog.logs.deleteAll();
+          MyLogger.logs.deleteAll();
         }),
       ],
     );
@@ -106,14 +106,14 @@ class _HomePageState extends State<HomePage> {
       children: <Widget>[
         _buildButton("Print last hour Logs", () async {
           print("\nPrinting last hour logs:");
-          FLog.logs.getLastHour().then((logs) => logs.forEach(print));
+          MyLogger.logs.getLastHour().then((logs) => logs.forEach(print));
         }),
         Padding(padding: EdgeInsets.symmetric(horizontal: 5.0)),
         _buildButton("Print last 10 min Logs", () async {
           print("\nPrinting last 10 min logs:");
           final dateTime = DateTime.now().subtract(Duration(minutes: 10));
           final filter = LogFilter(startDateTime: dateTime);
-          FLog.logs.getByFilter(filter).then((logs) => logs.forEach(print));
+          MyLogger.logs.getByFilter(filter).then((logs) => logs.forEach(print));
         }),
       ],
     );
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
     return Row(
       children: <Widget>[
         _buildButton("Log Event with StackTrace", () {
-          FLog.error(
+          MyLogger.error(
             "My log",
             dataLogType: DataLogType.DEVICE,
             className: "Home",
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
         _buildButton("Delete Logs older then 10 minutes", () {
           final dateTime = DateTime.now().subtract(Duration(minutes: 10));
           final filter = LogFilter(endDateTime: dateTime);
-          FLog.logs.deleteByFilter(filter).then((_) => print("Deleted"));
+          MyLogger.logs.deleteByFilter(filter).then((_) => print("Deleted"));
         }),
       ],
     );
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
 
   // general methods:-----------------------------------------------------------
   void logInfo() {
-    FLog.log(
+    MyLogger.log(
       className: "HomePage",
       methodName: "_buildRow1",
       text: "Log text/descritption goes here",
@@ -163,8 +163,8 @@ class _HomePageState extends State<HomePage> {
       dataLogType: DataLogType.DEVICE,
     );
 
-    FLog.config..activeLogLevel = LogLevel.DEBUG;
-    FLog.info('LogLevel set to: ${FLog.config.activeLogLevel}.');
+    MyLogger.config..activeLogLevel = LogLevel.DEBUG;
+    MyLogger.info('LogLevel set to: ${MyLogger.config.activeLogLevel}.');
   }
 
   void logException() {
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
       var result = 9 ~/ 0;
       print(result);
     } on Exception catch (exception) {
-      FLog.error(
+      MyLogger.error(
         "Exception text/descritption goes here",
         dataLogType: DataLogType.ERRORS,
         className: "Home",
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void logWarning() {
-    FLog.warning(
+    MyLogger.warning(
       "Log text/descritption goes here",
       className: "HomePage",
       methodName: "_buildRow1",
@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void logTrace() {
-    FLog.trace(
+    MyLogger.trace(
       "Log text/descritption goes here",
       className: "HomePage",
       methodName: "_buildRow1",

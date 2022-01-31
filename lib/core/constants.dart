@@ -2,13 +2,13 @@ class Constants {
   Constants._();
 
   /// Directory
-  static const DIRECTORY_NAME = 'FLogs';
+  static const DIRECTORY_NAME = 'MyLogger';
 
   /// Store Name
-  static const STORE_NAME = 'flogs';
+  static const STORE_NAME = 'my_logger';
 
   /// DB Name
-  static const DB_NAME = 'flog.db';
+  static const DB_NAME = 'my_logger.db';
 
   /// Encryption key null exception
   static const EXCEPTION_NULL_KEY =

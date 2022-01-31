@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flogs/flogs.dart';
+import 'package:my_logger/my_logger.dart';
 
 class LogsConfiguration {
   Future<LogsDatabase> get database async => await LogsDatabase.instance;

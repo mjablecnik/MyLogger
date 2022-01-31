@@ -27,7 +27,7 @@ dependencies:
   # permission handler
   permission_handler: ^8.3.0
 
-  flogs:
+  my_logger:
     path: ../
 
 dev_dependencies:

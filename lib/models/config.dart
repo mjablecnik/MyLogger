@@ -1,5 +1,5 @@
-import 'package:flogs/models/log_file.dart';
-import 'package:flogs/flogs.dart';
+import 'package:my_logger/models/log_file.dart';
+import 'package:my_logger/my_logger.dart';
 
 typedef String? StackTraceFormatter(StackTrace stackTrace);
 

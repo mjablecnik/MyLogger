@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:flogs/core/constants.dart';
-import 'package:flogs/models/log.dart';
-import 'package:flogs/core/utils.dart';
+import 'package:my_logger/core/constants.dart';
+import 'package:my_logger/models/log.dart';
+import 'package:my_logger/core/utils.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flogs/models/log_file.dart' as model;
+import 'package:my_logger/models/log_file.dart' as model;
 
 class LogsExporter {
   static final LogsExporter _singleton = LogsExporter._();

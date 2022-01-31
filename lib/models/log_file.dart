@@ -1,4 +1,4 @@
-import 'package:flogs/core/constants.dart';
+import 'package:my_logger/core/constants.dart';
 
 class LogFile {
   final String name;

@@ -1,4 +1,4 @@
-import 'package:flogs/core/constants.dart';
+import 'package:my_logger/core/constants.dart';
 import 'package:sembast/sembast.dart';
 
 class LogFilter {

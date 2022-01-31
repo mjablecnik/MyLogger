@@ -1,8 +1,8 @@
-import 'package:flogs/core/utils.dart';
+import 'package:my_logger/core/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:template_string/src/extension.dart';
 
-import '../flogs.dart';
+import '../my_logger.dart';
 
 class Log {
   // Id will be gotten from the database.
@@ -31,7 +31,7 @@ class Log {
     this.stacktrace,
   }) {
     if (dataLogType != null) {
-      final dataLogType = FLog.config.dataLogTypeValues.first.runtimeType;
+      final dataLogType = MyLogger.config.dataLogTypeValues.first.runtimeType;
       if (this.dataLogType.runtimeType != dataLogType) {
         throw "DataLogType is not: $dataLogType";
       }
@@ -60,7 +60,7 @@ class Log {
       timestamp: json[LogFields.timestamp],
       timeInMillis: json[LogFields.timeInMillis],
       exception: json[LogFields.exception],
-      dataLogType: Utils.toEnum(FLog.config.dataLogTypeValues, json[LogFields.dataLogType]),
+      dataLogType: Utils.toEnum(MyLogger.config.dataLogTypeValues, json[LogFields.dataLogType]),
       logLevel: Utils.toEnum(LogLevel.values, json[LogFields.logLevel]),
       stacktrace: json[LogFields.stacktrace],
     );
@@ -68,18 +68,18 @@ class Log {
 
   @override
   String toString() {
-    String output = FLog.config.outputFormat.insertTemplateValues({
+    String output = MyLogger.config.outputFormat.insertTemplateValues({
       "time": timestamp!,
       "level": Utils.fromEnumToString(logLevel),
       "message": text!,
       "class": className!,
       "method": methodName!,
-      "dataLogType": Utils.fromEnumToString(dataLogType) ?? FLog.config.defaultDataLogType,
+      "dataLogType": Utils.fromEnumToString(dataLogType) ?? MyLogger.config.defaultDataLogType,
       "exception": exception ?? '',
       "stacktrace": stacktrace ?? '',
     });
 
-    if (FLog.config.isDevelopmentDebuggingEnabled) {
+    if (MyLogger.config.isDevelopmentDebuggingEnabled) {
       output += !kReleaseMode ? " ${dataLogType} ${timeInMillis}" : "";
     }
 

@@ -1,4 +1,4 @@
-import 'package:flogs/models/config.dart';
+import 'package:my_logger/models/config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 

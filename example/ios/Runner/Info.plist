@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>FLogs would like to save photos from the app to your gallery</string>
+    <string>MyLogger would like to save photos from the app to your gallery</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>FLogs would like to access your photo gallery for uploading images to the app</string>
+    <string>MyLogger would like to access your photo gallery for uploading images to the app</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

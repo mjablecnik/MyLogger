@@ -1,4 +1,4 @@
-import 'package:flogs/flogs.dart';
+import 'package:my_logger/my_logger.dart';
 import 'package:flutter/widgets.dart';
 
 class LogsWidget extends StatefulWidget {
@@ -21,7 +21,7 @@ class _LogsWidgetState extends State<LogsWidget> {
   }
 
   Future<void> load() async {
-    final logs = await FLog.logs.getByFilter(LogFilter(
+    final logs = await MyLogger.logs.getByFilter(LogFilter(
       startDateTime: widget.from ?? DateTime(2020),
       endDateTime: widget.to ?? DateTime.now(),
     ));

@@ -1,10 +1,10 @@
-import 'package:flogs/flogs.dart';
-import 'package:flogs/services/logs_configuration.dart';
-import 'package:flogs/core/utils.dart';
+import 'package:my_logger/my_logger.dart';
+import 'package:my_logger/services/logs_configuration.dart';
+import 'package:my_logger/core/utils.dart';
 import 'package:stack_trace/stack_trace.dart';
 
-class FLog {
-  FLog._();
+class MyLogger {
+  MyLogger._();
 
   static LogConfig get config => LogsConfiguration.instance.config;
 
