@@ -1,6 +1,5 @@
-import 'package:my_logger/my_logger.dart';
-import 'package:my_logger/services/logs_configuration.dart';
-import 'package:my_logger/core/utils.dart';
+import 'package:my_logger/logger.dart';
+import 'package:my_logger/logger_core.dart';
 import 'package:stack_trace/stack_trace.dart';
 
 class MyLogger {

@@ -1,4 +1,4 @@
-import 'package:my_logger/my_logger.dart';
+import 'package:my_logger/logger.dart';
 import 'package:flutter/widgets.dart';
 
 class LogsWidget extends StatefulWidget {

@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:my_logger/my_logger.dart';
+import 'package:my_logger/logger.dart';
 import 'package:my_logger/core/encryption/gcm.dart';
+import 'package:my_logger/logger_core.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';

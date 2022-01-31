@@ -1,5 +1,6 @@
-import 'package:my_logger/my_logger.dart';
 import 'package:flutter/material.dart';
+import 'package:my_logger/logger.dart';
+import 'package:my_logger/logger_core.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() {
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("FLog example"),
+        title: Text("MyLogger example"),
         centerTitle: true,
         actions: [IconButton(onPressed: _showLogs, icon: Icon(Icons.list_alt))],
       ),

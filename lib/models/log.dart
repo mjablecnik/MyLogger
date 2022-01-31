@@ -1,8 +1,6 @@
-import 'package:my_logger/core/utils.dart';
 import 'package:flutter/foundation.dart';
-import 'package:template_string/src/extension.dart';
-
-import '../my_logger.dart';
+import 'package:my_logger/logger_core.dart';
+import 'package:my_logger/models/logger.dart';
 
 class Log {
   // Id will be gotten from the database.

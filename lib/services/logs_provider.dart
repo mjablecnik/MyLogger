@@ -1,7 +1,9 @@
 import 'dart:io' as io;
 import 'dart:async';
 
-import 'package:my_logger/my_logger.dart';
+import 'package:my_logger/logger.dart';
+
+import '../logger_core.dart';
 
 class LogsProvider {
   static LogConfig get config => LogsConfiguration.instance.config;
