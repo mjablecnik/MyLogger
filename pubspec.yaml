@@ -12,7 +12,7 @@ dependencies:
 
   sembast: ^3.1.1+1
   path_provider: ^2.0.8
-  intl: ^0.17.0
+  intl: ^0.18.0
 
   xxtea: ^2.1.0
   pointycastle: ^3.5.0
