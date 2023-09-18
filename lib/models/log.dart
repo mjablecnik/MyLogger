@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:my_logger/logger_core.dart';
 import 'package:my_logger/models/logger.dart';
+import 'package:jinja/jinja.dart';
 
 class Log {
   // Id will be gotten from the database.
@@ -66,7 +67,8 @@ class Log {
 
   @override
   String toString() {
-    String output = MyLogger.config.outputFormat.insertTemplateValues({
+    var template = Environment().fromString(MyLogger.config.outputFormat);
+    String output = template.render({
       "time": timestamp!,
       "level": Utils.fromEnumToString(logLevel),
       "message": text!,

@@ -13,6 +13,8 @@ ios/Runner/GeneratedPluginRegistrant.*
 example/ios/Flutter/flutter_export_environment.sh
 example/.flutter-plugins-dependencies
 
+.flutter-plugins*
+
 # FVM during tests
 .fvm
 .vscode/settings.json

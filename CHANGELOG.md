@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## [Unreleased]
+- Upgrade dependencies
 
 
 
-## [3.0.0] - 2022-01-21
+## [1.0.0] - 2022-01-21
 ### Added
 - AES GCM encryption
 - Fix invalid type cast
