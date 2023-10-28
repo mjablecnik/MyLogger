@@ -44,7 +44,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  my_logger: ^1.0.0
+  my_logger: ^1.0.1
 ```
 
 **2. Install it**
