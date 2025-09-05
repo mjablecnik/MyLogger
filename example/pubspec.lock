@@ -108,26 +108,18 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
+    version: "0.20.2"
   jinja:
     dependency: transitive
     description:
       name: jinja
-      sha256: bec5ecbc8f067d2092d8f25c7f861c7875a29c935cffb7628acd4038aef0f129
+      sha256: "8cf446a04d01d10bf1c213c2c9d2a30b3602d1c035ae3ad86e518770abc05987"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0"
-  js:
-    dependency: transitive
-    description:
-      name: js
-      sha256: "53385261521cc4a0c4658fd0ad07a7d14591cf8fc33abbceae306ddb974888dc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.2"
+    version: "0.6.4"
   leak_tracker:
     dependency: transitive
     description:
@@ -315,10 +307,10 @@ packages:
     dependency: transitive
     description:
       name: pointycastle
-      sha256: "4be0097fcf3fd3e8449e53730c631200ebc7b88016acecab2b0da2f0149222fe"
+      sha256: "92aa3841d083cc4b0f4709b5c74fd6409a3e6ba833ffc7dc6a8fee096366acf5"
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.1"
+    version: "4.0.0"
   sembast:
     dependency: transitive
     description:
@@ -392,10 +384,10 @@ packages:
     dependency: transitive
     description:
       name: textwrap
-      sha256: "342fb85c503a27c68e0dd21f7be35360acf3231f929e0dcb23cc8593d2919c36"
+      sha256: "780b164d83dfed30b475b1310d288145c5e0109193c3c507cf015d38e4adc844"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "2.0.0"
   typed_data:
     dependency: transitive
     description:
