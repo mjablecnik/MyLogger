@@ -31,17 +31,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   _showLogs() => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => Scaffold(
-            appBar: AppBar(
-              title: Text("Log List"),
-              centerTitle: true,
-            ),
-            body: LogsWidget(),
-          ),
+    context,
+    MaterialPageRoute(
+      builder: (_) => Scaffold(
+        appBar: AppBar(
+          title: Text("Log List"),
+          centerTitle: true,
         ),
-      );
+        body: LogsWidget(),
+      ),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
