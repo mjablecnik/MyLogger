@@ -1,7 +1,7 @@
 name: my_logger
 description: MyLogger provides quick &amp; simple logging solution. All logs are saved to the DB which can be exported into files.
 repository: https://github.com/mjablecnik/MyLogger
-version: 1.0.2
+version: 1.1.0
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
